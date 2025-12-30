@@ -10,6 +10,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Build and Deploy to pvuf.plazza.xyz
+    environment: 
+      name: production
+      url: https://pvuf.plazza.xyz/
 
     steps:
       - name: Checkout repository
