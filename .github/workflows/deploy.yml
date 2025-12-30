@@ -59,7 +59,17 @@ jobs:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          
+          # Write key with proper cleanup of whitespace
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          
+          # Verify key format
+          if ! grep -q "BEGIN.*PRIVATE KEY" ~/.ssh/deploy_key; then
+            echo "ERROR: SSH private key format is invalid!"
+            echo "Key should start with '-----BEGIN RSA PRIVATE KEY-----' or '-----BEGIN OPENSSH PRIVATE KEY-----'"
+            exit 1
+          fi
+          
           chmod 600 ~/.ssh/deploy_key
           
           # Add host to known_hosts to avoid interactive prompt
@@ -68,7 +78,11 @@ jobs:
           # If passphrase is provided, add key to ssh-agent
           if [ -n "$SSH_KEY_PASSPHRASE" ]; then
             eval $(ssh-agent -s)
-            echo "$SSH_KEY_PASSPHRASE" | ssh-add ~/.ssh/deploy_key
+            echo "$SSH_KEY_PASSPHRASE" | ssh-add -p ~/.ssh/deploy_key 2>&1 || {
+              echo "ERROR: Failed to add key to ssh-agent"
+              ssh-add -L
+              exit 1
+            }
           fi
           
           # Configure SSH to use our key
@@ -80,13 +94,37 @@ jobs:
               IdentityFile ~/.ssh/deploy_key
               StrictHostKeyChecking accept-new
               UserKnownHostsFile ~/.ssh/known_hosts
+              IdentitiesOnly yes
           EOF
           
           chmod 600 ~/.ssh/config
+          
+          # Debug: Show key info
+          echo "=== SSH Key Debug Info ==="
+          echo "Key file exists: $([ -f ~/.ssh/deploy_key ] && echo 'YES' || echo 'NO')"
+          echo "Key permissions: $(stat -c '%a' ~/.ssh/deploy_key 2>/dev/null || echo 'N/A')"
+          echo "Key type: $(ssh-keygen -l -f ~/.ssh/deploy_key 2>&1 | head -1 || echo 'Error reading key')"
 
       - name: Test SSH connection
+        env:
+          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_KEY_PASSPHRASE || '' }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
+          # If we set up ssh-agent in previous step, export the agent variables
+          eval $(ssh-agent)
+          
+          # Re-add key if passphrase exists (for this step)
+          if [ -n "$SSH_KEY_PASSPHRASE" ]; then
+            echo "$SSH_KEY_PASSPHRASE" | ssh-add ~/.ssh/deploy_key 2>&1 || true
+          fi
+          
+          # Test connection with verbose output
           ssh -vvv deploy "echo 'SSH Connection successful!'; pwd; php --version" || {
+            echo ""
+            echo "=== SSH Connection Debug ==="
+            echo "Attempting direct SSH debug..."
+            ssh -vvv -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "echo test" || true
+            echo ""
             echo "SSH connection failed. Checking connectivity..."
             ping -c 1 ${{ secrets.DEPLOY_HOST }} || echo "Host unreachable"
             exit 1
