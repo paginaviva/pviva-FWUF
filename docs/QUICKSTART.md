@@ -18,19 +18,17 @@
   - Activado automáticamente en push a `main`
   - Genera build.json con información de despliegue
   - Configura autenticación SSH con secretos de GitHub
-  - Sincroniza archivos vía rsync
+  - Sincroniza archivos vía SCP
   - Verifica que la sincronización fue exitosa
   - No requiere Composer, npm ni Node.js en el servidor
 
 ✅ **Claves SSH Dedicadas**:
-  - Generadas como ED25519 (seguras y modernas)
-  - Sin contraseña (para máxima compatibilidad con automatización)
+  - Generadas como RSA con passphrase (seguras y compatibles con este entorno)
   - Clave pública lista para instalar en servidor
   - Clave privada lista para GitHub Secrets
 
 ✅ **Documentación**:
-  - DEPLOYMENT.md - Guía completa de configuración
-  - SSH_KEYS.md - Detalles de claves y setup
+  - Fase_1_Resumen_LECCIONES_APRENDIDAS.md - Resumen consolidado de lecciones aprendidas
   - Este archivo - Resumen y checklist
 
 ---
@@ -44,7 +42,7 @@
 ssh plazzaxy@pvuf.plazza.xyz
 
 # Añade esta línea a ~/.ssh/authorized_keys
-echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKSXyxpc3kEAdt19phJ2IF1nRnF4YVSts9rMig+DOmsm pvuf-github-actions-deploy" >> ~/.ssh/authorized_keys
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArandomkey pvuf-github-actions-deploy" >> ~/.ssh/authorized_keys
 
 # Asegura permisos
 chmod 600 ~/.ssh/authorized_keys
@@ -72,16 +70,10 @@ DEPLOY_KEY = [CLAVE PRIVADA COMPLETA - ver abajo]
 
 ### Paso 4: Copiar Clave Privada a GitHub Secret DEPLOY_KEY
 
-La clave privada está en [SSH_KEYS.md](SSH_KEYS.md). Cópiala exactamente:
+La clave privada está en el archivo consolidado `Fase_1_Resumen_LECCIONES_APRENDIDAS.md`. Cópiala exactamente:
 
 ```
------BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACCkl8saXN5BAHbdfaYSdiBdZ0ZxeGFUrbPazIoPgzprJgAAAKAQcwLWEHMC
-1gAAAAtzc2gtZWQyNTUxOQAAACCkl8saXN5BAHbdfaYSdiBdZ0ZxeGFUrbPazIoPgzprJg
-AAAEAZVTfJ/NuMJfnXFw1fAalHGhyG46cPScO55zjEpOXlWaSXyxpc3kEAdt19phJ2IF1n
-RnF4YVSts9rMig+DOmsmAAAAGnB2dWYtZ2l0aHViLWFjdGlvbnMtZGVwbG95AQID
------END OPENSSH PRIVATE KEY-----
+[Clave privada eliminada por seguridad]
 ```
 
 ### Paso 5: Push y Verificar
@@ -90,7 +82,7 @@ RnF4YVSts9rMig+DOmsmAAAAGnB2dWYtZ2l0aHViLWFjdGlvbnMtZGVwbG95AQID
 cd /workspaces/pviva-FWUF
 
 # Stage todos los archivos
-git add index.php build.json .github/workflows/deploy.yml DEPLOYMENT.md SSH_KEYS.md
+git add index.php build.json .github/workflows/deploy.yml
 
 # Commit
 git commit -m "Setup PVUF deployment automation"
@@ -122,13 +114,13 @@ Después de un push exitoso, abre **https://pvuf.plazza.xyz/** y verifica:
 
 ### Clave Pública
 ```
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKSXyxpc3kEAdt19phJ2IF1nRnF4YVSts9rMig+DOmsm pvuf-github-actions-deploy
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArandomkey pvuf-github-actions-deploy
 ```
 
 **Dónde instalar:** `~/.ssh/authorized_keys` en servidor (usuario: plazzaxy)
 
 ### Clave Privada
-**Ubicación:** [SSH_KEYS.md](SSH_KEYS.md) - Sección "Clave Privada (para GitHub Secrets)"
+**Ubicación:** `Fase_1_Resumen_LECCIONES_APRENDIDAS.md` - Sección "Clave Privada (para GitHub Secrets)"
 
 **Dónde usar:** GitHub Secret `DEPLOY_KEY`
 
@@ -137,7 +129,7 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKSXyxpc3kEAdt19phJ2IF1nRnF4YVSts9rMig+DOmsm
 SHA256:ayS7UYOrxsLh1/KS5Wy8KVr9Dnp15XI28TEMcTUb9tQ
 ```
 
-**Tipo:** ED25519 (sin contraseña)
+**Tipo:** RSA con passphrase
 
 ---
 
@@ -151,7 +143,7 @@ Copia esta tabla y úsala como referencia para crear los secretos:
 | `DEPLOY_USER` | string | `plazzaxy` | Literal |
 | `DEPLOY_PORT` | string | `22` | Literal (como texto) |
 | `DEPLOY_PATH` | string | `/home/plazzaxy/pvuf.plazza.xyz` | Literal |
-| `DEPLOY_KEY` | secret | [Clave privada] | [SSH_KEYS.md](SSH_KEYS.md) - Copia exactamente |
+| `DEPLOY_KEY` | secret | [Clave privada] | `Fase_1_Resumen_LECCIONES_APRENDIDAS.md` - Copia exactamente |
 
 ---
 
@@ -161,8 +153,7 @@ Copia esta tabla y úsala como referencia para crear los secretos:
 pviva-FWUF/
 ├── index.php                        # Página principal
 ├── build.json                       # Identificador (generado por GA)
-├── DEPLOYMENT.md                    # Guía de configuración
-├── SSH_KEYS.md                      # Detalles de claves SSH
+├── Fase_1_Resumen_LECCIONES_APRENDIDAS.md # Resumen consolidado
 ├── QUICKSTART.md                    # Este archivo
 ├── README.md                        # Descripción original
 └── .github/
@@ -177,7 +168,7 @@ pviva-FWUF/
 1. **Haces push a main** → GitHub dispara el workflow
 2. **Workflow genera build.json** con timestamp y commit hash
 3. **Configura SSH** con las claves del secreto
-4. **Sincroniza archivos** al servidor (rsync)
+4. **Sincroniza archivos** al servidor (SCP)
 5. **Verifica la sincronización**
 6. **Apache/Nginx sirve index.php**
 7. **La página muestra PHP version y deployment ID**
@@ -216,5 +207,5 @@ pviva-FWUF/
 ---
 
 **Última actualización:** 2025-12-30  
-**Versión:** 1.0  
+**Versión:** 1.2  
 **Estado:** Listo para usar
