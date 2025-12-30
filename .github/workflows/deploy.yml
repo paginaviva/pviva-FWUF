@@ -101,7 +101,7 @@ jobs:
             exit 1
           }
 
-      - name: Deploy files via rsync
+      - name: Deploy files via SCP
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
@@ -109,15 +109,11 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           echo "Starting deployment to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH..."
-          rsync -avz \
-            --delete-excluded \
-            --exclude='.git*' \
-            --exclude='.github' \
-            --exclude='*.md' \
-            --exclude='.gitignore' \
-            -e "ssh -p $DEPLOY_PORT" \
-            index.php build.json \
-            $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+          
+          # Copy files via SCP
+          scp -p -P $DEPLOY_PORT index.php $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+          scp -p -P $DEPLOY_PORT build.json $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+          
           echo "Deployment completed!"
 
       - name: Verify deployment
