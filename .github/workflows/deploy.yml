@@ -78,7 +78,7 @@ jobs:
           # If passphrase is provided, add key to ssh-agent
           if [ -n "$SSH_KEY_PASSPHRASE" ]; then
             eval $(ssh-agent -s)
-            echo "$SSH_KEY_PASSPHRASE" | ssh-add -p ~/.ssh/deploy_key 2>&1 || {
+            echo "$SSH_KEY_PASSPHRASE" | ssh-add ~/.ssh/deploy_key 2>&1 || {
               echo "ERROR: Failed to add key to ssh-agent"
               ssh-add -L
               exit 1
