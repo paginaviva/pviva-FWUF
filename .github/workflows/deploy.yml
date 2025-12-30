@@ -51,103 +51,55 @@ jobs:
           echo "=== Files to be deployed ==="
           ls -lah index.php build.json
 
-      - name: Setup SSH Key
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_KEY_PASSPHRASE || '' }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-        run: |
-          mkdir -p ~/.ssh
-          
-          # Write key with proper cleanup of whitespace
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          
-          # Verify key format
-          if ! grep -q "BEGIN.*PRIVATE KEY" ~/.ssh/deploy_key; then
-            echo "ERROR: SSH private key format is invalid!"
-            echo "Key should start with '-----BEGIN RSA PRIVATE KEY-----' or '-----BEGIN OPENSSH PRIVATE KEY-----'"
-            exit 1
-          fi
-          
-          chmod 600 ~/.ssh/deploy_key
-          
-          # Add host to known_hosts to avoid interactive prompt
-          ssh-keyscan -p ${DEPLOY_PORT:-22} ${DEPLOY_HOST} >> ~/.ssh/known_hosts 2>/dev/null || true
-          
-          # If passphrase is provided, add key to ssh-agent
-          if [ -n "$SSH_KEY_PASSPHRASE" ]; then
-            eval $(ssh-agent -s)
-            echo "$SSH_KEY_PASSPHRASE" | ssh-add ~/.ssh/deploy_key 2>&1 || {
-              echo "ERROR: Failed to add key to ssh-agent"
-              ssh-add -L
-              exit 1
-            }
-          fi
-          
-          # Configure SSH to use our key
-          cat > ~/.ssh/config <<EOF
-          Host deploy
-              HostName ${DEPLOY_HOST}
-              User ${{ secrets.DEPLOY_USER }}
-              Port ${DEPLOY_PORT:-22}
-              IdentityFile ~/.ssh/deploy_key
-              StrictHostKeyChecking accept-new
-              UserKnownHostsFile ~/.ssh/known_hosts
-              IdentitiesOnly yes
-          EOF
-          
-          chmod 600 ~/.ssh/config
-          
-          # Debug: Show key info
-          echo "=== SSH Key Debug Info ==="
-          echo "Key file exists: $([ -f ~/.ssh/deploy_key ] && echo 'YES' || echo 'NO')"
-          echo "Key permissions: $(stat -c '%a' ~/.ssh/deploy_key 2>/dev/null || echo 'N/A')"
-          echo "Key type: $(ssh-keygen -l -f ~/.ssh/deploy_key 2>&1 | head -1 || echo 'Error reading key')"
+      - name: Setup SSH Agent with Private Key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+          ssh-known-hosts: ${{ secrets.DEPLOY_HOST }}
 
       - name: Test SSH connection
         env:
-          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_KEY_PASSPHRASE || '' }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
         run: |
-          # If we set up ssh-agent in previous step, export the agent variables
-          eval $(ssh-agent)
-          
-          # Re-add key if passphrase exists (for this step)
-          if [ -n "$SSH_KEY_PASSPHRASE" ]; then
-            echo "$SSH_KEY_PASSPHRASE" | ssh-add ~/.ssh/deploy_key 2>&1 || true
-          fi
-          
-          # Test connection with verbose output
-          ssh -vvv deploy "echo 'SSH Connection successful!'; pwd; php --version" || {
+          echo "Testing SSH connection to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT..."
+          ssh -vvv -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "echo 'SSH Connection successful!'; pwd; php --version" || {
             echo ""
-            echo "=== SSH Connection Debug ==="
-            echo "Attempting direct SSH debug..."
-            ssh -vvv -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "echo test" || true
-            echo ""
-            echo "SSH connection failed. Checking connectivity..."
-            ping -c 1 ${{ secrets.DEPLOY_HOST }} || echo "Host unreachable"
+            echo "ERROR: SSH connection failed!"
+            ping -c 1 $DEPLOY_HOST || echo "Host unreachable"
             exit 1
           }
 
       - name: Deploy files via rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
+          echo "Starting deployment to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH..."
           rsync -avz \
             --delete-excluded \
             --exclude='.git*' \
             --exclude='.github' \
             --exclude='*.md' \
-            --exclude='SSH_KEYS.md' \
             --exclude='.gitignore' \
-            -e "ssh -p ${{ secrets.DEPLOY_PORT || 22 }}" \
+            -e "ssh -p $DEPLOY_PORT" \
             index.php build.json \
-            ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/
+            $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+          echo "Deployment completed!"
 
       - name: Verify deployment
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
-          ssh -p ${{ secrets.DEPLOY_PORT || 22 }} \
-            ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
-            "ls -lah ${{ secrets.DEPLOY_PATH }}/ && echo '---' && cat ${{ secrets.DEPLOY_PATH }}/build.json"
+          echo "Verifying deployment..."
+          ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST \
+            "ls -lah $DEPLOY_PATH/ && echo '---' && cat $DEPLOY_PATH/build.json"
 
       - name: Create deployment summary
         if: always()
