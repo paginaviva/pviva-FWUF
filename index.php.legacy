@@ -1,5 +1,24 @@
 <?php
 /**
+ * ⚠️ ARCHIVO HISTÓRICO - NO ES EL PUNTO DE ENTRADA FINAL
+ * 
+ * Este archivo fue utilizado durante la Fase 1 y Fase 2 para validar:
+ * - El despliegue automatizado desde GitHub Actions
+ * - La ejecución de PHP 8.3+ en el servidor
+ * - La conectividad SSH y sincronización de archivos
+ * 
+ * ESTE ARCHIVO NO DEBE USARSE COMO RUNTIME FINAL DE LA APLICACIÓN.
+ * 
+ * Según la arquitectura UserFrosting skeleton-like establecida en Fase 3:
+ * - El punto de entrada HTTP definitivo es: public/index.php
+ * - Solo la carpeta public/ debe ser accesible por HTTP
+ * - Este archivo quedará fuera del webroot en producción
+ * 
+ * Fecha de archivo: 2025-12-30
+ * Referencia: docs/Fase_3_Decision_HTTP_Entry_Point.md
+ */
+
+/**
  * PVUF - Deployment Validation & Server Info Dashboard
  * 
  * This page validates:

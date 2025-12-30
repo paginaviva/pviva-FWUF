@@ -1,0 +1,41 @@
+{
+    "name": "paginaviva/pviva-fwuf",
+    "type": "project",
+    "description": "PVUF - UserFrosting Application",
+    "keywords": ["userfrosting"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PaginaViva",
+            "homepage": "https://github.com/paginaviva"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "userfrosting/userfrosting": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "UserFrosting\\App\\": "app/src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "post-create-project-cmd": [
+            "php bakery bake"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.3"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

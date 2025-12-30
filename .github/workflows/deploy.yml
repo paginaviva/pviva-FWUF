@@ -1,17 +1,17 @@
-name: Deploy PVUF to Shared Hosting
+name: Deploy PVUF to Staging
 
 on:
   push:
     branches:
-      - main
+      - F3-uf-skeleton-like
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy to pvuf.plazza.xyz
+    name: Build and Deploy UserFrosting to pvuf.plazza.xyz
     environment: 
-      name: production
+      name: staging
       url: https://pvuf.plazza.xyz/
 
     steps:
@@ -19,6 +19,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: gd, mbstring, xml, curl, zip, mysql, pdo_mysql
+          tools: composer:v2
 
       - name: Generate deployment identifier
         id: deployment
@@ -49,10 +56,74 @@ jobs:
           echo "Build Timestamp: ${BUILD_TIMESTAMP}"
           echo "Build Date: ${BUILD_DATE}"
 
-      - name: Verify build artifact
+      - name: Install Composer dependencies
         run: |
-          echo "=== Files to be deployed ==="
-          ls -lah index.php build.json
+          echo "Installing dependencies..."
+          composer install --no-dev --optimize-autoloader --no-interaction
+          echo "Dependencies installed successfully"
+
+      - name: Prepare deployment artifact
+        run: |
+          echo "=== Preparing deployment artifact ==="
+          mkdir -p /tmp/deploy
+          
+          # Copy application structure
+          cp -r public /tmp/deploy/
+          cp -r app /tmp/deploy/
+          cp -r vendor /tmp/deploy/
+          cp -r storage /tmp/deploy/
+          
+          # Copy configuration files
+          cp composer.json /tmp/deploy/
+          cp composer.lock /tmp/deploy/
+          cp build.json /tmp/deploy/
+          
+          # Copy environment example
+          cp .env.example /tmp/deploy/
+          
+          echo "=== Deployment artifact structure ==="
+          ls -lah /tmp/deploy/
+          du -sh /tmp/deploy/
+
+      - name: Create .env file for staging
+        run: |
+          cat > /tmp/deploy/.env <<EOF
+          # Staging Environment Configuration
+          APP_ENV=staging
+          APP_DEBUG=false
+          APP_URL=https://pvuf.plazza.xyz
+          
+          # Database
+          DB_CONNECTION=mysql
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=${{ secrets.DB_PORT }}
+          DB_DATABASE=${{ secrets.DB_DATABASE }}
+          DB_USERNAME=${{ secrets.DB_USERNAME }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          
+          # Mail
+          MAIL_MAILER=smtp
+          MAIL_HOST=${{ secrets.MAIL_HOST }}
+          MAIL_PORT=${{ secrets.MAIL_PORT }}
+          MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}
+          MAIL_ENCRYPTION=${{ secrets.MAIL_ENCRYPTION }}
+          MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}
+          MAIL_FROM_NAME=PVUF
+          
+          # Security
+          APP_KEY=${{ secrets.APP_KEY }}
+          SESSION_LIFETIME=120
+          SESSION_DRIVER=file
+          
+          # Cache
+          CACHE_DRIVER=file
+          
+          # Logging
+          LOG_LEVEL=info
+          EOF
+          
+          echo ".env file created for staging"
 
       - name: Setup SSH with Passphrase Support
         env:
@@ -97,14 +168,13 @@ jobs:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
         run: |
           echo "Testing SSH connection to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT..."
-          ssh -vvv -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "echo 'SSH Connection successful!'; pwd; php --version" || {
+          ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "echo 'SSH Connection successful!'; pwd; php --version" || {
             echo ""
             echo "ERROR: SSH connection failed!"
-            ping -c 1 $DEPLOY_HOST || echo "Host unreachable"
             exit 1
           }
 
-      - name: Deploy files via SCP
+      - name: Deploy application via SCP
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
@@ -113,11 +183,37 @@ jobs:
         run: |
           echo "Starting deployment to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH..."
           
-          # Copy files via SCP
-          scp -p -P $DEPLOY_PORT index.php $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
-          scp -p -P $DEPLOY_PORT build.json $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+          # Create backup of existing deployment (if exists)
+          ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST \
+            "if [ -d $DEPLOY_PATH ]; then \
+              cp -r $DEPLOY_PATH ${DEPLOY_PATH}_backup_$(date +%Y%m%d_%H%M%S); \
+            fi"
           
-          echo "Deployment completed!"
+          # Transfer the entire application
+          scp -r -P $DEPLOY_PORT /tmp/deploy/* $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/
+          
+          echo "Files transferred successfully!"
+
+      - name: Set permissions on server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST << 'EOSSH'
+            cd ${{ secrets.DEPLOY_PATH }}
+            
+            # Set proper permissions
+            chmod -R 755 public/
+            chmod -R 775 storage/
+            
+            # Ensure writable directories exist and are writable
+            mkdir -p storage/logs storage/cache storage/sessions
+            chmod -R 775 storage/
+            
+            echo "Permissions set successfully"
+          EOSSH
 
       - name: Verify deployment
         env:
@@ -128,12 +224,14 @@ jobs:
         run: |
           echo "Verifying deployment..."
           ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST \
-            "ls -lah $DEPLOY_PATH/ && echo '---' && cat $DEPLOY_PATH/build.json"
+            "ls -lah $DEPLOY_PATH/ && echo '---' && \
+             ls -lah $DEPLOY_PATH/public/ && echo '---' && \
+             cat $DEPLOY_PATH/build.json"
 
       - name: Create deployment summary
         if: always()
         run: |
-          cat > /tmp/deployment_summary.txt <<EOF
+          cat <<EOF
           # Deployment Summary
           
           **Status:** Success ✓
@@ -141,42 +239,17 @@ jobs:
           **Build Timestamp:** ${{ steps.deployment.outputs.build_timestamp }}
           **Deployed to:** ${{ secrets.DEPLOY_HOST }}
           **Path:** ${{ secrets.DEPLOY_PATH }}
-          **URL:** https://${{ secrets.DEPLOY_HOST }}/
+          **URL:** https://pvuf.plazza.xyz/
           
-          ## Verification
+          ## Next Steps
           
-          After deployment, verify the site:
-          1. Open https://${{ secrets.DEPLOY_HOST }}/
-          2. Check that the commit hash shows: ${{ steps.deployment.outputs.commit_short }}
-          3. Check that the PHP version is displayed
-          4. Check that the build timestamp is recent
+          1. Change webroot in hosting panel to point to: ${{ secrets.DEPLOY_PATH }}/public
+          2. Access https://pvuf.plazza.xyz/ to run UserFrosting installation
+          3. Complete installation wizard with admin user credentials
+          4. Verify MariaDB connection
+          5. Test SMTP email sending
           
           EOF
-          cat /tmp/deployment_summary.txt
-
-      - name: Comment deployment result on PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const commitShort = '${{ steps.deployment.outputs.commit_short }}';
-            const buildTimestamp = '${{ steps.deployment.outputs.build_timestamp }}';
-            const deployHost = '${{ secrets.DEPLOY_HOST }}';
-            
-            const comment = `## 🚀 Deployment Info
-            
-            - **Commit:** \`${commitShort}\`
-            - **Build Timestamp:** \`${buildTimestamp}\`
-            - **Deployed to:** ${deployHost}
-            - **Verify at:** https://${deployHost}/
-            `;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
 
   notify-failure:
     runs-on: ubuntu-latest

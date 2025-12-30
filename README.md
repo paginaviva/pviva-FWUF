@@ -1,166 +1,171 @@
-# PVUF - Validación de Despliegue Automatizado
+# PVUF - Proyecto de Validación y Transición a UserFrosting
 
-Proyecto PHP mínimo para validar:
-1. Que el servidor ejecuta **PHP 8.3** o superior
-2. Que es posible **despliegue automatizado desde GitHub Actions** hacia servidor compartido vía SSH (rsync)
+Aplicación web basada en **UserFrosting 5.x** con arquitectura skeleton-like, despliegue automatizado y separación clara entre código de aplicación y recursos públicos.
+
+**Estado:** Fase 4 - Incorporación de UserFrosting y despliegue a staging  
+**Rama de trabajo:** `F3-uf-skeleton-like`  
+**Staging:** `https://pvuf.plazza.xyz/`
 
 ## 🎯 Objetivo
 
-Este mini proyecto permite verificar que un servidor compartido:
-- ✅ Ejecuta PHP 8.3+
-- ✅ Es accesible vía SSH con autenticación por clave
-- ✅ Puede recibir despliegues automáticos desde GitHub Actions
-- ✅ **Sin ejecutar Composer, npm ni Node.js** en el servidor
+Este proyecto implementa una aplicación **UserFrosting 5.x** completa con:
+
+- ✅ Arquitectura skeleton-like (webroot = `public/`)
+- ✅ Despliegue automatizado desde GitHub Actions
+- ✅ Construcción de dependencias en CI/CD (sin Composer/npm en servidor)
+- ✅ Base de datos MariaDB en staging
+- ✅ Correo SMTP real configurado
+- ✅ Instalación completa con usuario administrador
+- ✅ **Cero secretos en el repositorio**
+
+## 📚 Documentación
+
+### Fase 3 - Arquitectura UserFrosting skeleton-like (Cerrada)
+
+- **[Fase_3_UF_skeleton-like_architecture.md](docs/Fase_3_UF_skeleton-like_architecture.md)** - Arquitectura general y estructura de carpetas
+- **[Fase_3_Decision_HTTP_Entry_Point.md](docs/Fase_3_Decision_HTTP_Entry_Point.md)** - Decisión sobre el punto de entrada HTTP (`public/index.php`)
+- **[Fase_3_Environment_Matrix.md](docs/Fase_3_Environment_Matrix.md)** - Matriz de entornos y configuración
+
+### Fase 4 - Incorporación de UserFrosting y Despliegue a Staging (En Progreso)
+
+- **[Fase_4_Configuracion_Entorno_Staging.md](docs/Fase_4_Configuracion_Entorno_Staging.md)** - Variables de entorno y secretos de GitHub Actions
+
+## 🔒 Límite de Exposición HTTP (Frontera HTTP)
+
+**CONTRATO DE SEGURIDAD:** Solo la carpeta `public/` es accesible por HTTP.
+
+El webroot del hosting **debe apuntar a `public/`**. Las siguientes rutas y archivos NO deben ser accesibles directamente por URL:
+
+- `app/` - Código de aplicación
+- `vendor/` - Dependencias de Composer
+- `config/` - Archivos de configuración
+- `storage/` - Datos persistentes y logs
+- `.env` - Variables de entorno y secretos
+
+**Punto de entrada HTTP definitivo:** `public/index.php`
+
+> ⚠️ El cambio del webroot en el panel del hosting se realiza tras el primer despliegue que crea la estructura completa en el servidor.
 
 ## 📁 Estructura
 
 ```
 PVUF/
-├── index.php                    # Página web de validación
-├── build.json                   # Identificador de despliegue (generado por GA)
-├── DEPLOYMENT.md                # Guía completa de configuración
-├── SSH_KEYS.md                  # Detalles de claves SSH
-├── QUICKSTART.md                # Resumen rápido e instalación
-├── SSH_PASSPHRASE_PLAN.md       # Plan alternativo con contraseña
+├── public/                      # ⚠️ ÚNICO DIRECTORIO ACCESIBLE POR HTTP
+│   ├── index.php               # Entry point (front controller)
+│   ├── .htaccess               # Rewrite rules para Apache
+│   └── assets/                 # Assets estáticos (futuro)
+│
+├── app/                         # Código de aplicación (privado)
+│   ├── app.php                 # Bootstrap de UserFrosting
+│   ├── src/                    # Código fuente
+│   ├── config/                 # Configuración
+│   └── templates/              # Plantillas
+│
+├── vendor/                      # Dependencias (NO versionado)
+├── storage/                     # Cache, logs, sesiones (NO versionado)
+│   ├── logs/
+│   ├── cache/
+│   └── sessions/
+│
+├── docs/                        # Documentación normativa
+├── .env.example                # Plantilla de configuración
+├── composer.json               # Dependencias PHP
+├── composer.lock               # Lock de dependencias
 └── .github/workflows/
-    └── deploy.yml               # Workflow de GitHub Actions
+    └── deploy.yml              # Workflow de despliegue automatizado
+```
+│   ├── Fase_3_UF_skeleton-like_architecture.md
+│   ├── Fase_3_Decision_HTTP_Entry_Point.md
+│   ├── Fase_3_Environment_Matrix.md
+│   └── Fase_3_Cierre_Checklist.md
+├── DEPLOYMENT.md               # Guía completa de configuración
+├── SSH_KEYS.md                 # Detalles de claves SSH
+├── QUICKSTART.md               # Resumen rápido e instalación
+├── SSH_PASSPHRASE_PLAN.md      # Plan alternativo con contraseña
+└── .github/workflows/
+    └── deploy.yml              # Workflow de GitHub Actions
 ```
 
-## 🚀 Quick Start
+## 🚀 Despliegue a Staging
 
-1. **Instala la clave pública en el servidor:**
-   ```bash
-   echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKSXyxpc3kEAdt19phJ2IF1nRnF4YVSts9rMig+DOmsm pvuf-github-actions-deploy" >> ~/.ssh/authorized_keys
-   chmod 600 ~/.ssh/authorized_keys
-   ```
+### Prerrequisitos
 
-2. **Crea los secretos en GitHub** (Settings > Secrets):
-   - `DEPLOY_HOST` = `pvuf.plazza.xyz`
-   - `DEPLOY_USER` = `plazzaxy`
-   - `DEPLOY_PORT` = `22`
-   - `DEPLOY_PATH` = `/home/plazzaxy/pvuf.plazza.xyz`
-   - `DEPLOY_KEY` = [Clave privada - ver SSH_KEYS.md]
+1. **Secretos configurados en GitHub Actions** (ver [Fase_4_Configuracion_Entorno_Staging.md](docs/Fase_4_Configuracion_Entorno_Staging.md))
+2. **Base de datos MariaDB** provisionada en el servidor
+3. **Credenciales SMTP** para envío de correo
 
-3. **Haz push a main:**
-   ```bash
-   git push origin main
-   ```
+### Proceso de Despliegue
 
-4. **Verifica en GitHub Actions** que el workflow termina en verde
+El despliegue es completamente automatizado:
 
-5. **Abre la página:**
-   ```
-   https://pvuf.plazza.xyz/
-   ```
+```bash
+# 1. Commit y push a la rama F3-uf-skeleton-like
+git add .
+git commit -m "Update application"
+git push origin F3-uf-skeleton-like
 
-Ver [QUICKSTART.md](QUICKSTART.md) para pasos detallados.
+# 2. GitHub Actions automáticamente:
+#    - Instala dependencias con Composer
+#    - Genera archivo .env con secretos
+#    - Despliega vía SCP al servidor
+#    - Configura permisos
 
-## 📖 Documentación
-
-- **[QUICKSTART.md](QUICKSTART.md)** - Instalación rápida (5 pasos)
-- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Guía completa con solución de problemas
-- **[SSH_KEYS.md](SSH_KEYS.md)** - Detalles de autenticación SSH
-- **[SSH_PASSPHRASE_PLAN.md](SSH_PASSPHRASE_PLAN.md)** - Alternativa con contraseña
-
-## ✅ Qué Valida
-
-### En la Página Web (index.php)
-
-- **Versión de PHP:** Detectada en tiempo de ejecución, p.ej. "PHP 8.3.0"
-- **Commit Hash:** Primeros 7 caracteres del commit desplegado
-- **Build Timestamp:** Marca de tiempo UTC de la construcción
-- **Build Date:** Fecha legible de la construcción
-- **Entorno:** "Prueba de Despliegue"
-
-### En GitHub Actions (deploy.yml)
-
-- ✅ Checkout del código
-- ✅ Generación automática de build.json con info de despliegue
-- ✅ Configuración SSH con secretos
-- ✅ Test de conexión SSH
-- ✅ Sincronización vía rsync
-- ✅ Verificación de despliegue exitoso
-
-## 🔐 Seguridad
-
-- **Claves SSH:** ED25519 (256-bit, moderna y segura)
-- **Sin contraseña:** Generadas sin passphrase para máxima compatibilidad
-- **Secretos en GitHub:** La clave privada se almacena de forma segura en GitHub Secrets
-- **Plan alternativo:** Si requieres contraseña, ver [SSH_PASSPHRASE_PLAN.md](SSH_PASSPHRASE_PLAN.md)
-
-## 🐛 Solución de Problemas
-
-Primero, lee [DEPLOYMENT.md - Solución de Problemas](DEPLOYMENT.md#-solución-de-problemas).
-
-Errores comunes:
-
-| Error | Solución |
-|-------|----------|
-| "Permission denied (publickey)" | Instala la clave pública en `~/.ssh/authorized_keys` |
-| "Could not resolve hostname" | Verifica que `DEPLOY_HOST` es correcto |
-| "rsync not found" | Usa scp en lugar de rsync, o contacta hosting |
-| Página muestra "1970..." | El build.json no fue actualizado; revisa logs GA |
-
-## 🔄 Ciclo de Despliegue
-
-```
-Push a main
-    ↓
-GitHub Actions dispara workflow
-    ↓
-Genera build.json (commit hash + timestamp)
-    ↓
-Configura SSH + rsync
-    ↓
-Sincroniza al servidor
-    ↓
-index.php lee build.json y lo muestra
-    ↓
-https://pvuf.plazza.xyz/ se actualiza
+# 3. Acceder a staging
+open https://pvuf.plazza.xyz/
 ```
 
-## 📋 Checklist de Verificación
+### Primera Instalación
 
-Después de push:
+Después del primer despliegue:
 
-- [ ] Workflow en GitHub Actions termina en verde
-- [ ] Página en `https://pvuf.plazza.xyz/` carga sin errores
-- [ ] Se ve "PHP 8.3" (o superior)
-- [ ] El commit hash coincide con el último push
-- [ ] El timestamp es reciente (últimos minutos)
-- [ ] Un segundo push muestra commit hash diferente
+1. **Cambiar webroot en el hosting** para apuntar a `{DEPLOY_PATH}/public`
+2. **Acceder a** `https://pvuf.plazza.xyz/`
+3. **Completar el wizard de instalación** de UserFrosting
+4. **Crear usuario administrador**
+5. **Verificar envío de correo** desde la aplicación
 
-## 🎓 Requisitos
+Ver documentación detallada en [docs/](docs/).
 
-- ✅ PHP 8.3+ en el servidor (validado)
-- ✅ SSH access (usuario: `plazzaxy`)
-- ✅ rsync en el servidor (o scp como alternativa)
-- ✅ GitHub repository con Actions habilitado
-- ✅ GitHub Codespaces para trabajar sin entorno local
+## 🔐 Seguridad y Configuración
 
-## ❌ No Requiere
+- **Secretos:** Todos los secretos residen en GitHub Actions Secrets y en `.env` del servidor
+- **Repositorio limpio:** No hay credenciales, contraseñas ni claves en el código versionado
+- **Separación de entornos:** Development, Staging, Production según [Fase_3_Environment_Matrix.md](docs/Fase_3_Environment_Matrix.md)
 
-- ❌ Composer en el servidor
-- ❌ npm o Node.js en el servidor
-- ❌ Herramientas de construcción en el servidor
-- ❌ Subdirectorios especiales (public_html, etc.)
-- ❌ Bases de datos
-- ❌ Entorno local Docker/local
+## 📋 Checklist de Verificación Fase 4
 
-## 📝 Licencia
+- [ ] Estructura skeleton UserFrosting 5.x incorporada
+- [ ] `public/index.php` existe y funciona como entry point
+- [ ] Workflow de GitHub Actions construye dependencias
+- [ ] Despliegue a staging exitoso vía SCP
+- [ ] Webroot del hosting apunta a `public/`
+- [ ] Instalación de UserFrosting completada
+- [ ] Usuario administrador funcional
+- [ ] Base de datos MariaDB operativa
+- [ ] Correo SMTP funcional y verificado
+- [ ] Cero secretos en el repositorio
 
-Este proyecto es de código abierto. Úsalo libremente.
+## 🎓 Tecnologías
 
-## 📞 Soporte
+- **PHP** 8.3+
+- **UserFrosting** 5.x
+- **Composer** (gestión de dependencias)
+- **MariaDB** (base de datos)
+- **GitHub Actions** (CI/CD)
+- **Apache** con mod_rewrite
 
-Para problemas:
-1. Lee [DEPLOYMENT.md](DEPLOYMENT.md)
-2. Revisa los logs de GitHub Actions
-3. Verifica SSH desde línea de comandos
-4. Contacta a tu proveedor de hosting si hay problemas de servidor
+## ❌ No Requiere en el Servidor
+
+- ❌ Composer (las dependencias se construyen en CI/CD)
+- ❌ npm o Node.js
+- ❌ Git
+- ❌ Herramientas de construcción
+
+Todo el build se ejecuta en GitHub Actions. El servidor solo necesita PHP y Apache.
 
 ---
 
 **Última actualización:** 2025-12-30  
-**Versión:** 1.0  
-**Estado:** Listo para usar ✅
+**Versión:** Fase 4  
+**Estado:** En implementación 🔧
+

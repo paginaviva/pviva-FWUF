@@ -1,17 +1,24 @@
-# Ignorar archivos de desarrollo local
+# Environment files (contain secrets)
 .env
 .env.local
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
+.env.*.local
 
-# Ignorar directorios de dependencias (no debería haber, pero por si acaso)
+# Dependencies (generated during build)
 vendor/
 node_modules/
 
-# Ignorar keys locales (nunca commitar keys)
+# Storage (generated at runtime)
+storage/logs/*
+storage/cache/*
+storage/sessions/*
+!storage/logs/.gitkeep
+!storage/cache/.gitkeep
+!storage/sessions/.gitkeep
+
+# Build artifacts
+build.json
+
+# SSH keys (never commit)
 ~/.ssh/
 *.pem
 *_rsa
@@ -26,6 +33,11 @@ node_modules/
 *.sublime-workspace
 
 # OS
+.DS_Store
 .AppleDouble
 .LSOverride
+Thumbs.db
+*.swp
+*.swo
+*~
 ehthumbs.db

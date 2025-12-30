@@ -1,0 +1,2 @@
+# Este archivo asegura que la carpeta public/ permanece en el control de versiones
+# La carpeta public/ será el webroot accesible por HTTP según la arquitectura UserFrosting skeleton-like
