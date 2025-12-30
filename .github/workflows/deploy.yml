@@ -51,11 +51,41 @@ jobs:
           echo "=== Files to be deployed ==="
           ls -lah index.php build.json
 
-      - name: Setup SSH Agent with Private Key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
-          ssh-known-hosts: ${{ secrets.DEPLOY_HOST }}
+      - name: Setup SSH with Passphrase Support
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_KEY_PASSPHRASE }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          mkdir -p ~/.ssh
+          
+          # Write private key
+          cat > ~/.ssh/deploy_key <<'EOF'
+          ${{ secrets.DEPLOY_KEY }}
+          EOF
+          
+          chmod 600 ~/.ssh/deploy_key
+          
+          # Add host to known_hosts
+          ssh-keyscan -p ${DEPLOY_PORT:-22} ${DEPLOY_HOST} >> ~/.ssh/known_hosts 2>/dev/null || true
+          
+          # Create a script to provide passphrase to ssh-add
+          cat > /tmp/ssh_passphrase.sh <<'EOFPASS'
+          #!/bin/bash
+          echo "$SSH_KEY_PASSPHRASE"
+          EOFPASS
+          chmod +x /tmp/ssh_passphrase.sh
+          
+          # Start ssh-agent and add key with passphrase
+          eval $(ssh-agent -s)
+          export SSH_ASKPASS=/tmp/ssh_passphrase.sh
+          export SSH_ASKPASS_REQUIRE=force
+          echo "$SSH_KEY_PASSPHRASE" | setsid ssh-add ~/.ssh/deploy_key 2>&1 || true
+          
+          # Export agent info for subsequent steps
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> $GITHUB_ENV
 
       - name: Test SSH connection
         env:
