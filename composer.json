@@ -20,7 +20,10 @@
     "autoload": {
         "psr-4": {
             "UserFrosting\\App\\": "app/src/"
-        }
+        },
+        "exclude-from-classmap": [
+            "vendor/userfrosting/userfrosting/app/src/MyApp.php"
+        ]
     },
     "scripts": {
         "test": "phpunit",
