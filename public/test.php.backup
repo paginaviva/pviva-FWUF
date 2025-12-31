@@ -1,0 +1,1028 @@
+<?php
+/**
+ * UserFrosting Installation Diagnostic Test
+ * 
+ * Este script analiza el estado completo de la instalación en el servidor
+ * para generar un diagnóstico preciso basado en hechos reales.
+ * 
+ * INSTRUCCIONES:
+ * 1. Descargar este archivo al servidor
+ * 2. Colocarlo en {DEPLOY_PATH}/public/test.php
+ * 3. Acceder vía navegador: https://pvuf.plazza.xyz/test.php
+ * 4. Copiar TODO el resultado
+ * 5. ELIMINAR este archivo después de usarlo (contiene info sensible)
+ * 
+ * @version 1.0
+ * @date 2025-12-31
+ */
+
+// Configuración de la base de datos
+define('DB_HOST', 'localhost');
+define('DB_PORT', '3306');
+define('DB_NAME', 'pvuf5fw');
+define('DB_USER', 'usrpvuf5fw');
+define('DB_PASS', 'gegkK9tkkyZDaADG');
+
+// Deshabilitar cache para ver errores reales
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+header('Content-Type: text/html; charset=utf-8');
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserFrosting - Diagnóstico de Instalación</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .status-ok { color: #27ae60; font-weight: bold; }
+        .status-warning { color: #f39c12; font-weight: bold; }
+        .status-error { color: #e74c3c; font-weight: bold; }
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #dc3545;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .badge-ok { background: #27ae60; color: white; }
+        .badge-warning { background: #f39c12; color: white; }
+        .badge-error { background: #e74c3c; color: white; }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 UserFrosting - Diagnóstico de Instalación</h1>
+        <p><strong>Fecha:</strong> <?php echo date('Y-m-d H:i:s'); ?> UTC</p>
+        <p><strong>Servidor:</strong> <?php echo $_SERVER['SERVER_NAME'] ?? 'N/A'; ?></p>
+        
+        <?php
+        // Variables globales para el resumen
+        $errors = 0;
+        $warnings = 0;
+        $success = 0;
+        
+        // Array para almacenar todos los resultados del diagnóstico
+        $diagnosticResults = [
+            'timestamp' => date('Y-m-d H:i:s'),
+            'server' => $_SERVER['SERVER_NAME'] ?? 'N/A',
+            'sections' => []
+        ];
+        
+        $systemInfo = [
+            'php_version' => phpversion(),
+            'os' => php_uname(),
+            'server_software' => $_SERVER['SERVER_SOFTWARE'] ?? 'N/A',
+            'document_root' => $_SERVER['DOCUMENT_ROOT'] ?? 'N/A',
+            'script_path' => __FILE__,
+            'project_root' => $projectRoot,
+            'php_user' => get_current_user(),
+            'uid' => getmyuid(),
+            'gid' => getmygid()
+        ];
+        
+        $diagnosticResults['sections']['system_info'] = $systemInfo;
+        
+        echo "<table>";
+        echo "<tr><th>Parámetro</th><th>Valor</th></tr>";
+        echo "<tr><td>PHP Version</td><td>" . $systemInfo['php_version'] . "</td></tr>";
+        echo "<tr><td>Sistema Operativo</td><td>" . $systemInfo['os'] . "</td></tr>";
+        echo "<tr><td>Servidor Web</td><td>" . $systemInfo['server_software'] . "</td></tr>";
+        echo "<tr><td>Document Root</td><td>" . $systemInfo['document_root'] . "</td></tr>";
+        echo "<tr><td>Script Path</td><td>" . $systemInfo['script_path'] . "</td></tr>";
+        echo "<tr><td>Project Root (calculado)</td><td>" . $systemInfo['project_root'] . "</td></tr>";
+        echo "<tr><td>Usuario PHP</td><td>" . $systemInfo['php_user'] . "</td></tr>";
+        echo "<tr><td>UID del proceso</td><td>" . $systemInfo['uid'] . "</td></tr>";
+        echo "<tr><td>GID del proceso</td><td>" . $systemInfo['gid'] . "</td></tr>";
+        echo "</table>";
+        
+        // ================================================================
+        // 2. REQUISITOS DE PHP
+        // ================================================================
+        echo "<h2>2. Requisitos de PHP</h2>";
+        
+        $phpRequirements = [
+            'version' => [
+                'name' => 'PHP >= 8.1',
+                'check' => version_compare(phpversion(), '8.1.0', '>='),
+                'current' => phpversion()
+            ],
+            'pdo' => [
+                'name' => 'PDO Extension',
+                'check' => extension_loaded('pdo'),
+                'current' => extension_loaded('pdo') ? 'Instalado' : 'No instalado'
+            ],
+            'pdo_mysql' => [
+                'name' => 'PDO MySQL Driver',
+                'check' => extension_loaded('pdo_mysql'),
+                'current' => extension_loaded('pdo_mysql') ? 'Instalado' : 'No instalado'
+            ],
+            'mbstring' => [
+                'name' => 'Mbstring Extension',
+                'check' => extension_loaded('mbstring'),
+                'current' => extension_loaded('mbstring') ? 'Instalado' : 'No instalado'
+            ],
+            'gd' => [
+                'name' => 'GD Extension',
+                'check' => extension_loaded('gd'),
+                'current' => extension_loaded('gd') ? 'Instalado' : 'No instalado'
+            ],
+            'curl' => [
+                'name' => 'cURL Extension',
+                'check' => extension_loaded('curl'),
+                'current' => extension_loaded('curl') ? 'Instalado' : 'No instalado'
+            ],
+            'zip' => [
+                'name' => 'ZIP Extension',
+                'check' => extension_loaded('zip'),
+                'current' => extension_loaded('zip') ? 'Instalado' : 'No instalado'
+            ],
+            'json' => [
+                'name' => 'JSON Extension',
+                'check' => extension_loaded('json'),
+                'current' => extension_loaded('json') ? 'Instalado' : 'No instalado'
+            ],
+            'openssl' => [
+                'name' => 'OpenSSL Extension',
+                'check' => extension_loaded('openssl'),
+                'current' => extension_loaded('openssl') ? 'Instalado' : 'No instalado'
+            ]
+        ];
+        
+        $diagnosticResults['sections']['php_requirements'] = $phpRequirements;
+        
+        echo "<table>";
+        echo "<tr><th>Requisito</th><th>Estado</th><th>Valor Actual</th></tr>";
+        
+        foreach ($phpRequirements as $req) {
+            $status = $req['check'] ? 
+                '<span class="status-ok">✓ OK</span>' : 
+                '<span class="status-error">✗ FALTA</span>';
+            
+            if ($req['check']) {
+                $success++;
+            } else {
+                $errors++;
+            }
+            
+            echo "<tr><td>{$req['name']}</td><td>$status</td><td>{$req['current']}</td></tr>";
+        }
+        echo "</table>";
+        
+        // ================================================================
+        // 3. ESTRUCTURA DE DIRECTORIOS
+        // ================================================================
+        echo "<h2>3. Estructura de Directorios</h2>";
+        
+        $directories = [
+            'app' => $projectRoot . '/app',
+            'app/src' => $projectRoot . '/app/src',
+            'app/config' => $projectRoot . '/app/config',
+            'public' => $projectRoot . '/public',
+            'vendor' => $projectRoot . '/vendor',
+            'storage' => $projectRoot . '/storage',
+            'storage/logs' => $projectRoot . '/storage/logs',
+            'storage/cache' => $projectRoot . '/storage/cache',
+            'storage/sessions' => $projectRoot . '/storage/sessions'
+        ];
+        
+        $directoryResults = [];
+        
+        echo "<table>";
+        echo "<tr><th>Directorio</th><th>Existe</th><th>Permisos</th><th>Escribible</th><th>Owner</th></tr>";
+        
+        foreach ($directories as $name => $path) {
+            $exists = file_exists($path) && is_dir($path);
+            $perms = $exists ? substr(sprintf('%o', fileperms($path)), -4) : 'N/A';
+            $writable = $exists ? is_writable($path) : false;
+            
+            $owner = 'N/A';
+            if ($exists && function_exists('posix_getpwuid')) {
+                $fileowner = posix_getpwuid(fileowner($path));
+                $filegroup = posix_getgrgid(filegroup($path));
+                $owner = ($fileowner['name'] ?? 'unknown') . ':' . ($filegroup['name'] ?? 'unknown');
+            }
+            
+            $directoryResults[$name] = [
+                'path' => $path,
+                'exists' => $exists,
+                'permissions' => $perms,
+                'writable' => $writable,
+                'owner' => $owner
+            ];
+            
+            $existsStatus = $exists ? 
+                '<span class="status-ok">✓ Sí</span>' : 
+                '<span class="status-error">✗ No</span>';
+            
+            $writableStatus = $writable ? 
+                '<span class="status-ok">✓ Sí</span>' : 
+                '<span class="status-error">✗ No</span>';
+            
+            if (!$exists) {
+                $errors++;
+            } elseif (!$writable && strpos($name, 'storage') !== false) {
+                $errors++;
+            } elseif ($exists) {
+                $success++;
+            }
+            
+            echo "<tr><td><code>$name</code></td><td>$existsStatus</td><td><code>$perms</code></td><td>$writableStatus</td><td>$owner</td></tr>";
+        }
+        echo "</table>";
+        
+        $diagnosticResults['sections']['directories'] = $directoryResults;
+            
+            $existsStatus = $exists ? 
+        $fileResults = [];
+        
+        echo "<table>";
+        echo "<tr><th>Archivo</th><th>Existe</th><th>Legible</th><th>Tamaño</th><th>Modificado</th></tr>";
+        
+        foreach ($files as $name => $path) {
+            $exists = file_exists($path) && is_file($path);
+            $readable = $exists ? is_readable($path) : false;
+            $size = $exists ? filesize($path) : 0;
+            $modified = $exists ? date('Y-m-d H:i:s', filemtime($path)) : 'N/A';
+            
+            $fileResults[$name] = [
+                'path' => $path,
+                'exists' => $exists,
+                'readable' => $readable,
+                'size' => $size,
+                'modified' => $modified
+            ]
+                $errors++;
+            } elseif (!$writable && strpos($name, 'storage') !== false) {
+                $errors++;
+            } elseif ($exists) {
+                $success++;
+            }
+            
+            echo "<tr><td><code>$name</code></td><td>$existsStatus</td><td><code>$perms</code></td><td>$writableStatus</td><td>$owner</td></tr>";
+        }
+        echo "</table>";
+        
+        // ================================================================
+        // 4. ARCHIVOS CRÍTICOS
+        // ================================================================
+        echo "<h2>4. Archivos Críticos</h2>";
+        
+        $files = [
+            'public/index.php' => $projectRoot . '/public/index.php',
+        $diagnosticResults['sections']['files'] = $fileResults;
+        
+            'app/app.php' => $projectRoot . '/app/app.php',
+            'app/src/MyApp.php' => $projectRoot . '/app/src/MyApp.php',
+            'composer.json' => $projectRoot . '/composer.json',
+            'composer.lock' => $projectRoot . '/composer.lock',
+        $envResults = ['file_exists' => false, 'variables' => []];
+        
+        if (file_exists($envFile) && is_readable($envFile)) {
+            $envResults['file_exists'] = true;autoload.php',
+            '.env' => $projectRoot . '/.env',
+            '.env.example' => $projectRoot . '/.env.example'
+        ];
+        
+        echo "<table>";
+        echo "<tr><th>Archivo</th><th>Existe</th><th>Legible</th><th>Tamaño</th><th>Modificado</th></tr>";
+        
+        foreach ($files as $name => $path) {
+            $exists = file_exists($path) && is_file($path);
+            $readable = $exists ? is_readable($path) : false;
+            $size = $exists ? filesize($path) : 0;
+            $modified = $exists ? date('Y-m-d H:i:s', filemtime($path)) : 'N/A';
+            
+            $existsStatus = $exists ? 
+                '<span class="status-ok">✓ Sí</span>' : 
+                '<span class="status-error">✗ No</span>';
+            
+            $readableStatus = $readable ? 
+                '<span class="status-ok">✓ Sí</span>' : 
+                '<span class="status-error">✗ No</span>';
+            
+            if ($name !== '.env' && !$exists) {
+                $errors++;
+            } elseif ($name === '.env' && !$exists) {
+                $warnings++;
+            } elseif ($exists) {
+                $success++;
+            }
+            
+            echo "<tr><td><code>$name</code></td><td>$existsStatus</td><td>$readableStatus</td><td>" . ($size > 0 ? number_format($size) . ' bytes' : 'N/A') . "</td><td>$modified</td></tr>";
+        }
+        echo "</table>";
+        
+        // ================================================================
+        // 5. VARIABLES DE ENTORNO (.env)
+        // ================================================================
+        echo "<h2>5. Variables de Entorno</h2>";
+        
+        $envFile = $projectRoot . '/.env';
+        if (file_exists($envFile) && is_readable($envFile)) {
+            $envContent = file_get_contents($envFile);
+            $envLines = explode("\n", $envContent);
+            
+            echo "<h3>Archivo .env encontrado</h3>";
+            echo "<table>";
+            echo "<tr><th>Variable</th><th>Configurada</th><th>Valor (oculto si es sensible)</th></tr>";
+            
+            $envVars = [
+                'APP_ENV' => false,
+                'APP_DEBUG' => false,
+                'APP_URL' => false,
+                'APP_KEY' => true,
+                $envResults['variables'][$varName] = [
+                    'found' => $found,
+                    'has_value' => !empty($value),
+                    'is_sensitive' => $sensitive
+                ];
+                
+                'DB_HOST' => false,
+                'DB_PORT' => false,
+                'DB_DATABASE' => false,
+                'DB_USERNAME' => false,
+                'DB_PASSWORD' => true,
+                'MAIL_HOST' => false,
+        $diagnosticResults['sections']['environment'] = $envResults;
+        
+                'MAIL_PORT' => false,
+                'MAIL_USERNAME' => false,
+                'MAIL_PASSWORD' => true,
+        $dbResults = [
+            'connection' => false,
+            'host' => DB_HOST,
+            'port' => DB_PORT,
+            'database' => DB_NAME,
+            'user' => DB_USER,
+            'server_version' => null,
+            'tables' => []
+        ];
+        
+                'SESSION_DRIVER' => false,
+                'CACHE_DRIVER' => false
+            ];
+            
+            foreach ($envVars as $varName => $sensitive) {
+                $found = false;
+                $value = '';
+                
+                foreach ($envLines as $line) {
+                    $line = trim($line);
+            $dbResults['connection'] = true;
+            
+            // Información del servidor de BD
+            $serverVersion = $pdo->query('SELECT VERSION()')->fetchColumn();
+            $dbResults['server_version'] = $serverVersion
+                    if (strpos($line, $varName . '=') === 0) {
+                        $found = true;
+                        $value = substr($line, strlen($varName) + 1);
+                        $value = trim($value, '"\'');
+                        break;
+                    }
+                }
+                
+                $status = $found ? 
+                    '<span class="status-ok">✓ Sí</span>' : 
+                    '<span class="status-error">✗ No</span>';
+                
+                $displayValue = $found ? 
+                    ($sensitive ? '********' : ($value ?: '(vacío)')) : 
+                    'N/A';
+                
+                if (!$found || empty($value)) {
+                    $warnings++;
+                } else {
+                    $success++;
+                }
+                
+                echo "<tr><td><code>$varName</code></td><td>$status</td><td>$displayValue</td></tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<div class='error-box'>";
+            echo "<strong>⚠ Archivo .env NO encontrado o no legible</strong><br>";
+            echo "Ruta esperada: <code>$envFile</code><br>";
+            echo "El archivo .env es necesario para la configuración de UserFrosting.";
+            echo "</div>";
+            $errors++;
+        }
+        
+        // ================================================================
+        // 6. CONEXIÓN A BASE DE DATOS
+        // ================================================================
+        echo "<h2>6. Conexión a Base de Datos</h2>";
+        
+        echo "<div class='info-box'>";
+        echo "<strong>Credenciales de prueba:</strong><br>";
+        echo "Host: " . DB_HOST . ":" . DB_PORT . "<br>";
+        echo "Database: " . DB_NAME . "<br>";
+        echo "User: " . $dbResults['tables'][$table] = [
+                            'row_count' => $count,
+                            'engine' => $engine,
+                            'collation' => $collation
+                        ];
+                        
+                        DB_USER . "<br>";
+        echo "Password: ********";
+        echo "</div>";
+        
+        try {
+            $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+            $pdo = new PDO($dsn, DB_USER, DB_PASS, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+            
+            echo "<div class='success-box'>";
+            echo "<strong>✓ Conexión a base de datos exitosa</strong>";
+            echo "</div>";
+            $success++;
+            
+            // Información del servidor de BD
+            $serverVersion = $pdo->query('SELECT VERSION()')->fetchColumn();
+            echo "<h3>Información del Servidor MySQL/MariaDB</h3>";
+            echo "<table>";
+            echo "<tr><th>Parámetro</th><th>Valor</th></tr>";
+            echo "<tr><td>Versión del servidor</td><td>$serverVersion</td></tr>";
+            
+            // Variables del servidor
+            $vars = ['character_set_database', 'collation_database', 'max_connections', 'innodb_version'];
+            foreach ($vars as $var) {
+                try {
+                    $value = $pdo->query("SHOW VARIABLES LIKE '$var'")->fetch();
+                    echo "<tr><td>$var</td><td>" . ($value['Value'] ?? 'N/A') . "</td></tr>";
+                } catch (Exception $e) {
+                    echo "<tr><td>$var</td><td>N/A</td></tr>";
+                }
+            }
+            echo "</table>";
+            
+            // Tablas existentes
+            echo "<h3>Tablas en la Base de Datos</h3>";
+            $tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+            
+            $dbResults['error'] = $e->getMessage();
+            $dbResults['error_code'] = $e->getCode();
+        }
+        
+        $diagnosticResults['sections']['database'] = $dbResults;   
+            if (count($tables) > 0) {
+                eResults = ['lock_exists' => false, 'packages' => []];
+        
+        $composerLock = $projectRoot . '/composer.lock';
+        if (file_exists($composerLock) && is_readable($composerLock)) {
+            $composerResults['lock_exists'] = true;or</th><th>Collation</th></tr>";
+                
+                foreach ($tables as $idx => $table) {
+                    try {
+                $composerResults['total_packages'] = count($packages);
+                $composerResults['dev_packages'] = count($packagesDev);
+                $composerResults['php_required'] = $lockData['platform']['php'] ?? 'N/A';
+                
+                echo "<table>";
+                echo "<tr><th>Parámetro</th><th>Valor</th></tr>";
+                echo "<tr><td>Total de paquetes</td><td>" . count($packages) . "</td></tr>";
+                echo "<tr><td>Paquetes de desarrollo</td><td>" . count($packagesDev) . "</td></tr>";
+                echo "<tr><td>PHP requerido</td><td>" . $composerResults['php_required'] . "</td></tr>";
+                echo "</table>";
+                
+                // Buscar paquetes de UserFrosting
+                echo "<h3>Paquetes de UserFrosting instalados</h3>";
+                $ufPackages = array_filter($packages, function($pkg) {
+                    return strpos($pkg['name'], 'userfrosting') !== false;
+                });
+                
+                $composerResults['userfrosting_packages'] = []      echo "</tr>";
+                    } catch (Exception $e) {
+                        $composerResults['userfrosting_packages'][$pkg['name']] = $pkg['version'];
+                        echo "<tr><td>" . ($idx + 1) . "</td><td><code>$table</code></td><td colspan='3'>Error: " . $e->getMessage() . "</td></tr>";
+                    }
+                }
+                echo "</table>";
+                
+                // Verificar tablas de UserFrosting
+                $ufTables = ['users', 'roles', 'permissions', 'groups', 'migrations'];
+                $foundUfTables = array_intersect($ufTables, $tables);
+                
+                if (count($foundUfTables) > 0) {
+                    echo "<div class='success-box'>";
+                    echo "<strong>✓ Se encontraron " . count($foundUfTables) . " tablas de UserFrosting</strong><br>";
+                    echo "Tablas encontradas: " . implode(', ', $foundUfTables);
+                    echo "</div>";
+                } else {
+                    echo "<div class='warning-box'>";
+                    echo "<strong>⚠ No se encontraron tablas de UserFrosting</strong><br>";
+                    echo "La base de datos existe pero está vacía o no se ha ejecutado la instalación.";
+                    echo "</div>";
+                    $warnings++;
+                }
+            } else {
+                echo "<div class='warning-box'>";
+        $diagnosticResults['sections']['composer'] = $composerResults;
+        
+                echo "<strong>⚠ La base de datos está vacía</strong><br>";
+                echo "No se encontraron tablas. UserFrosting aún no ha sido instalado.";
+                echo "</div>";
+                $erResults = ['autoloader_exists' => false, 'classes' => []];
+        
+        $autoloadFile = $projectRoot . '/vendor/autoload.php';
+        if (file_exists($autoloadFile)) {
+            $autoloaderResults['autoloader_exists'] = true;
+            
+        } catch (PDOException $e) {
+            echo "<div class='error-box'>";
+            echo "<strong>✗ Error al conectar a la base de datos</strong><br>";
+            echo "<strong>Mensaje:</strong> " . htmlspecialchars($e->getMessage()) . "<br>";
+            echo "<strong>Código:</strong> " . $e->getCode();
+            echo "</div>";
+            $errors++;
+        }
+        
+        // ================================================================
+        // 7. COMPOSER Y DEPENDENCIAS
+        // ================================================================
+        echo "<h2>7. Composer y Dependencias</h2>";
+        
+        $composerLock = $projectRoot . '/composer.lock';
+        if (file_exists($composerLock) && is_readable($composerLock)) {
+            $lockData = json_decode(file_get_contents($composerLock), true);
+            
+            if ($lockData) {
+                $packages = $lockData['packages'] ?? [];
+                $packagesDev = $lockData['packages-dev'] ?? [];
+                
+                echo "<table>";
+                echo "<tr><th>Parámetro</th><th>Valor</th></tr>";
+                echo "<tr><td>Total de paquetes</td><td>" . count($packages) . "</td></tr>";
+                echo "<tr><td>Paquetes de desarrollo</td><td>" . count($packagesDev) . "</td></tr>";
+                echo "<tr><td>PHP requerido</td><td>" . ($lockData['platform']['php'] ?? 'N/A') . "</td></tr>";
+                echo$autoloaderResults['classes'][$class] = $exists;
+                    
+                     "</table>";
+                
+                // Buscar paquetes de UserFrosting
+                echo "<h3>Paquetes de UserFrosting instalados</h3>";
+                $ufPackages = array_filter($packages, function($pkg) {
+                    return strpos($pkg['name'], 'userfrosting') !== false;
+                });
+                
+                if (count($ufPackages) > 0) {
+                    echo "<table>";
+                    echo "<tr><th>Paquete</th><th>Versión</th></tr>";
+                    foreach ($ufPackages as $pkg) {
+                        echo "<tr><td><code>{$pkg['name']}</code></td><td>{$pkg['version']}</td></tr>";
+                    }
+                    echo "</table>";
+                    $success++;
+                } else {
+                    echo "<div class='warning-box'>No se encontraron paquetes de UserFrosting</div>";
+                    $warnings++;
+                }
+            }
+        } else {
+            echo "<div class='error-box'>Archivo composer.lock no encontrado o no legible</div>";
+            $errors++;
+        }
+        
+        // ================================================================
+        // 8. AUTOLOADER Y CLASES
+        // ================================================================
+        echo "<h2>8. Autoloader y Clases Críticas</h2>";
+        
+        $autoloadFile = $projectRoot . '/vendor/autoload.php';
+        if (file_exists($autoloadFile)) {
+            echo "<div class='success-box'>";
+        $diagnosticResults['sections']['autoloader'] = $autoloaderResults;
+        
+            echo "<strong>✓ Autoloader encontrado</strong><br>";
+            echo "Ruta: <code>$autoloadFile</code>";
+            echo "</div>";
+            $success++;
+            
+            // Intentar cargar el autoloader
+            try {
+                require_once $autoloadFile;
+                echo "<div class='success-box'>✓ Autoloader cargado exitosamente</div>";
+                
+                // Verificar clases críticas
+                $criticalClasses = [
+                    'UserFrosting\\UserFrosting',
+                    'UserFrosting\\App\\MyApp',
+                    'Dotenv\\Dotenv',
+                    'Slim\\App'
+                ];
+                
+                echo "<h3>Clases Críticas</h3>";
+                echo "<table>";
+                echo "<tr><th>Clase</th><th>Estado</th></tr>";
+                
+                foreach ($criticalClasses as $class) {
+                    $exists = class_exists($class) || interface_exists($class);
+                    $status = $exists ? 
+                        '<span class="status-ok">✓ Existe</span>' : 
+                        '<span class="status-error">✗ No encontrada</span>';
+                    
+                    if ($exists) {
+                        $success++;
+                    } else {
+                        $errors++;
+                    }
+                    
+                    echo "<tr><td><code>$class</code></td><td>$status</td></tr>";
+                }
+                echo "</table>";
+                
+            } catch (Exception $e) {
+                echo "<div class='error-box'>";
+                echo "<strong>✗ Error al cargar autoloader</strong><br>";
+                echo htmlspecialchars($e->getMessage());
+                echo "</div>";
+                $errors++;
+            }
+        } else {
+            echo "<div class='error-box'>";
+            echo "<strong>✗ Autoloader NO encontrado</strong><br>";
+            echo "Ruta esperada: <code>$autoloadFile</code><br>";
+            echo "Ejecutar: <code>composer install</code>";
+            echo "</div>";
+            $errors++;
+        }
+        
+        // ================================================================
+        // 9. LOGS Y ERRORES
+        // ================================================================
+        echo "<h2>9. Logs y Errores</h2>";
+        
+        
+        $diagnosticResults['sections']['php_settings'] = $phpSettings;
+        $logDir = $projectRoot . '/storage/logs';
+        if (is_dir($logDir) && is_readable($logDir)) {
+            $logFiles = glob($logDir . '/*.log');
+            
+            if (count($logFiles) > 0) {
+                echo "<h3>Archivos de log encontrados</h3>";
+                echo "<table>";
+                echo "<tr><th>Archivo</th><th>Tamaño</th><th>Modificado</th></tr>";
+                
+                foreach ($logFiles as $logFile) {
+                    $size = filesize($logFile);
+                    $modified = date('Y-m-d H:i:s', filemtime($logFile));
+                    $name = basename($logFile);
+                    
+                    echo "<tr><td><code>$name</code></td><td>" . number_format($size) . " bytes</td><td>$modified</td></tr>";
+                }
+        $diagnosticResults['summary'] = [
+            'success' => $success,
+            'warnings' => $warnings,
+            'errors' => $errors,
+            'total' => $total,
+            'success_percent' => $successPercent
+        ];
+        
+                echo "</table>";
+            } else {
+                echo "<div class='info-box'>No se encontraron archivos de log (esto es normal en una instalación nueva)</div>";
+            }
+        }
+        
+        // PHP error_log
+        $phpErrorLog = ini_get('error_log');
+        if ($phpErrorLog && file_exists($phpErrorLog) && is_readable($phpErrorLog)) {
+            echo "<h3>PHP Error Log</h3>";
+            echo "<div class='info-box'>";
+            echo "<strong>Ubicación:</strong> <code>$phpErrorLog</code><br>";
+            echo "<strong>Tamaño:</strong> " . number_format(filesize($phpErrorLog)) . " bytes<br>";
+            echo "<strong>Últimas 10 líneas:</strong>";
+            echo "<pre>";
+            $lines = file($phpErrorLog);
+            $lastLines = array_slice($lines, -10);
+            echo htmlspecialchars(implode('', $lastLines));
+            echo "</pre>";
+            echo "</div>";
+        }
+        
+        // ================================================================
+        // 10. CONFIGURACIÓN PHP
+        // ================================================================
+        echo "<h2>10. Configuración PHP Relevante</h2>";
+        
+        $phpSettings = [
+            'display_errors' => ini_get('display_errors'),
+            'error_reporting' => error_reporting(),
+            'log_errors' => ini_get('log_errors'),
+            'max_execution_time' => ini_get('max_execution_time'),
+            'memory_limit' => ini_get('memory_limit'),
+            'post_max_size' => ini_get('post_max_size'),
+            'upload_max_filesize' => ini_get('upload_max_filesize'),
+            'session.save_handler' => ini_get('session.save_handler'),
+            'session.save_path' => ini_get('session.save_path'),
+            'date.timezone' => ini_get('date.timezone'),
+            'allow_url_fopen' => ini_get('allow_url_fopen')
+        ];
+        
+        echo "<table>";
+        echo "<tr><th>Directiva</th><th>Valor</th></tr>";
+        foreach ($phpSettings as $key => $value) {
+            echo "<tr><td><code>$key</code></td><td>" . htmlspecialchars($value) . "</td></tr>";
+        }
+        echo "</table>";
+        
+        // ================================================================
+        // 11. RESUMEN FINAL
+        // ================================================================
+        echo "<h2>11. Resumen del Diagnóstico</h2>";
+        // ================================================================
+        // GENERAR ARCHIVO DE RESULTADOS
+        // ================================================================
+        
+        $resultsFilename = 'diagnostic-results-' . date('Y-m-d-His') . '.json';
+        $resultsPath = $projectRoot . '/storage/logs/' . $resultsFilename;
+        
+        // Intentar guardar en storage/logs/
+        $fileSaved = false;
+        if (is_dir($projectRoot . '/storage/logs') && is_writable($projectRoot . '/storage/logs')) {
+            file_put_contents($resultsPath, json_encode($diagnosticResults, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            $fileSaved = true;
+        } else {
+            // Si storage/logs/ no es escribible, intentar en /tmp/
+            $resultsPath = sys_get_temp_dir() . '/' . $resultsFilename;
+            file_put_contents($resultsPath, json_encode($diagnosticResults, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            $fileSaved = true;
+        }
+        
+        if ($fileSaved) {
+            echo "<h2>📄 Archivo de Resultados Generado</h2>";
+            echo "<div class='success-box'>";
+            echo "<strong>✓ Archivo creado exitosamente</strong><br>";
+            echo "<strong>Ubicación:</strong> <code>$resultsPath</code><br>";
+            echo "<strong>Tamaño:</strong> " . number_format(filesize($resultsPath)) . " bytes<br><br>";
+            echo "<a href='?download=json' style='display:inline-block; padding:10px 20px; background:#3498db; color:white; text-decoration:none; border-radius:4px; font-weight:bold;'>⬇ Descargar JSON</a> ";
+            echo "<a href='?download=txt' style='display:inline-block; padding:10px 20px; background:#27ae60; color:white; text-decoration:none; border-radius:4px; font-weight:bold;'>⬇ Descargar TXT</a>";
+            echo "</div>";
+        }
+        
+        ?>
+        
+        <div class="footer">
+            <p><strong>⚠ IMPORTANTE:</strong> Este archivo contiene información sensible del sistema.</p>
+            <p>Elimínalo inmediatamente después de copiar los resultados: <code>rm public/test.php</code></p>
+            <p>UserFrosting Diagnostic Tool v1.1 - <?php echo date('Y'); ?></p>
+        </div>
+    </div>
+</body>
+</html>
+
+<?php
+// ================================================================
+// MANEJO DE DESCARGAS
+// ================================================================
+if (isset($_GET['download']) && isset($diagnosticResults)) {
+    $format = $_GET['download'];
+    
+    if ($format === 'json') {
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename="uf-diagnostic-' . date('Ymd-His') . '.json"');
+        echo json_encode($diagnosticResults, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        exit;
+    } elseif ($format === 'txt') {
+        header('Content-Type: text/plain');
+        header('Content-Disposition: attachment; filename="uf-diagnostic-' . date('Ymd-His') . '.txt"');
+        
+        // Generar formato texto legible
+        $output = "========================================\n";
+        $output .= "UserFrosting - Diagnóstico de Instalación\n";
+        $output .= "========================================\n\n";
+        $output .= "Fecha: " . $diagnosticResults['timestamp'] . "\n";
+        $output .= "Servidor: " . $diagnosticResults['server'] . "\n\n";
+        
+        // 1. Sistema
+        $output .= "1. INFORMACIÓN DEL SISTEMA\n";
+        $output .= str_repeat("-", 40) . "\n";
+        foreach ($diagnosticResults['sections']['system_info'] as $key => $value) {
+            $output .= sprintf("%-20s: %s\n", $key, $value);
+        }
+        $output .= "\n";
+        
+        // 2. PHP Requirements
+        $output .= "2. REQUISITOS PHP\n";
+        $output .= str_repeat("-", 40) . "\n";
+        foreach ($diagnosticResults['sections']['php_requirements'] as $key => $req) {
+            $status = $req['check'] ? '[OK]' : '[FALTA]';
+            $output .= sprintf("%s %-25s: %s\n", $status, $req['name'], $req['current']);
+        }
+        $output .= "\n";
+        
+        // 3. Directorios
+        $output .= "3. ESTRUCTURA DE DIRECTORIOS\n";
+        $output .= str_repeat("-", 40) . "\n";
+        foreach ($diagnosticResults['sections']['directories'] as $name => $info) {
+            $exists = $info['exists'] ? 'Sí' : 'NO';
+            $writable = $info['writable'] ? 'Sí' : 'NO';
+            $output .= sprintf("%-20s: Existe=%s, Permisos=%s, Escribible=%s, Owner=%s\n", 
+                $name, $exists, $info['permissions'], $writable, $info['owner']);
+        }
+        $output .= "\n";
+        
+        // 4. Archivos
+        $output .= "4. ARCHIVOS CRÍTICOS\n";
+        $output .= str_repeat("-", 40) . "\n";
+        foreach ($diagnosticResults['sections']['files'] as $name => $info) {
+            $exists = $info['exists'] ? 'Sí' : 'NO';
+            $output .= sprintf("%-25s: Existe=%s, Tamaño=%d bytes\n", $name, $exists, $info['size']);
+        }
+        $output .= "\n";
+        
+        // 5. Base de datos
+        $output .= "6. BASE DE DATOS\n";
+        $output .= str_repeat("-", 40) . "\n";
+        $output .= "Conexión: " . ($diagnosticResults['sections']['database']['connection'] ? 'EXITOSA' : 'FALLIDA') . "\n";
+        $output .= "Host: " . $diagnosticResults['sections']['database']['host'] . "\n";
+        $output .= "Database: " . $diagnosticResults['sections']['database']['database'] . "\n";
+        if (isset($diagnosticResults['sections']['database']['server_version'])) {
+            $output .= "Versión: " . $diagnosticResults['sections']['database']['server_version'] . "\n";
+        }
+        $output .= "Tablas encontradas: " . count($diagnosticResults['sections']['database']['tables']) . "\n";
+        foreach ($diagnosticResults['sections']['database']['tables'] as $table => $info) {
+            $output .= "  - $table ({$info['row_count']} filas, {$info['engine']})\n";
+        }
+        $output .= "\n";
+        
+        // Resumen
+        $output .= "11. RESUMEN\n";
+        $output .= str_repeat("-", 40) . "\n";
+        $output .= "Exitosos:     " . $diagnosticResults['summary']['success'] . "\n";
+        $output .= "Advertencias: " . $diagnosticResults['summary']['warnings'] . "\n";
+        $output .= "Errores:      " . $diagnosticResults['summary']['errors'] . "\n";
+        $output .= "Total:        " . $diagnosticResults['summary']['total'] . "\n";
+        $output .= "Porcentaje:   " . $diagnosticResults['summary']['success_percent'] . "%\n";
+        
+        echo $output;
+        exit;
+    }
+}
+?  echo "<tr><th>TOTAL</th><th>$total</th><th>100%</th></tr>";
+        echo "</table>";
+        
+        if ($errors == 0 && $warnings == 0) {
+            echo "<div class='success-box'>";
+            echo "<h3>🎉 ¡Instalación Lista!</h3>";
+            echo "Todos los requisitos están cumplidos. UserFrosting debería funcionar correctamente.";
+            echo "</div>";
+        } elseif ($errors > 0) {
+            echo "<div class='error-box'>";
+            echo "<h3>⚠ Errores Críticos Detectados</h3>";
+            echo "Se encontraron $errors errores que deben ser corregidos antes de que UserFrosting pueda funcionar correctamente.";
+            echo "</div>";
+        } else {
+            echo "<div class='warning-box'>";
+            echo "<h3>⚠ Advertencias Detectadas</h3>";
+            echo "Se encontraron $warnings advertencias. La aplicación podría funcionar pero con limitaciones.";
+            echo "</div>";
+        }
+        
+        // ================================================================
+        // 12. RECOMENDACIONES
+        // ================================================================
+        echo "<h2>12. Recomendaciones</h2>";
+        
+        $recommendations = [];
+        
+        // Verificar storage/
+        if (!is_dir($projectRoot . '/storage') || !is_writable($projectRoot . '/storage')) {
+            $recommendations[] = "Crear o corregir permisos del directorio <code>storage/</code> y subdirectorios (logs, cache, sessions). Permisos recomendados: 775";
+        }
+        
+        // Verificar .env
+        if (!file_exists($projectRoot . '/.env')) {
+            $recommendations[] = "Crear archivo <code>.env</code> basado en <code>.env.example</code> y configurar las variables necesarias";
+        }
+        
+        // Verificar BD vacía
+        if (isset($pdo) && isset($tables) && count($tables) == 0) {
+            $recommendations[] = "Ejecutar la instalación de UserFrosting vía wizard web o comando <code>php bakery migrate</code>";
+        }
+        
+        if (count($recommendations) > 0) {
+            echo "<ol>";
+            foreach ($recommendations as $rec) {
+                echo "<li>$rec</li>";
+            }
+            echo "</ol>";
+        } else {
+            echo "<div class='success-box'>No hay recomendaciones adicionales. El sistema está configurado correctamente.</div>";
+        }
+        
+        ?>
+        
+        <div class="footer">
+            <p><strong>⚠ IMPORTANTE:</strong> Este archivo contiene información sensible del sistema.</p>
+            <p>Elimínalo inmediatamente después de copiar los resultados: <code>rm public/test.php</code></p>
+            <p>UserFrosting Diagnostic Tool v1.0 - <?php echo date('Y'); ?></p>
+        </div>
+    </div>
+</body>
+</html>
