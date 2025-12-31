@@ -1,0 +1,758 @@
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	﻿2025-12-31T06:16:10.5138837Z Current runner version: '2.330.0'
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5180674Z ##[group]Runner Image Provisioner
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5182713Z Hosted Compute Agent
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5184287Z Version: 20251211.462
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5186455Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5188398Z Build Date: 2025-12-11T16:28:49Z
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5190057Z Worker ID: {d8b5ded4-f650-46b5-997e-10c91e55a591}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5191891Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5193386Z ##[group]Operating System
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5195065Z Ubuntu
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5196556Z 24.04.3
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5197974Z LTS
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5199473Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5201129Z ##[group]Runner Image
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5202767Z Image: ubuntu-24.04
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5204178Z Version: 20251215.174.1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5206990Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5210458Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5213384Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5216616Z ##[group]GITHUB_TOKEN Permissions
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5220075Z Contents: read
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5221668Z Metadata: read
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5223117Z Packages: read
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5224663Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5229474Z Secret source: Actions
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5232033Z Prepare workflow directory
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5745241Z Prepare all required actions
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.5805325Z Getting action download info
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.8192697Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:10.9437140Z Download action repository 'shivammathur/setup-php@v2' (SHA:44454db4f0199b8b9685a5d763dc37cbf79108e1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set up job	2025-12-31T06:16:11.3042790Z Complete job name: Build and Deploy UserFrosting to ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	﻿2025-12-31T06:16:11.3840219Z ##[group]Run actions/checkout@v4
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3841448Z with:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3842177Z   fetch-depth: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3842874Z   repository: paginaviva/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3843822Z   token: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3844462Z   ssh-strict: true
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3845291Z   ssh-user: git
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3845954Z   persist-credentials: true
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3846641Z   clean: true
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3847295Z   sparse-checkout-cone-mode: true
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3848071Z   fetch-tags: false
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3848715Z   show-progress: true
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3849368Z   lfs: false
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3849993Z   submodules: false
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3850654Z   set-safe-directory: true
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.3851602Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.4964680Z Syncing repository: paginaviva/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.4967562Z ##[group]Getting Git version info
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.4968623Z Working directory is '/home/runner/work/pviva-FWUF/pviva-FWUF'
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.4970284Z [command]/usr/bin/git version
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5055455Z git version 2.52.0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5098699Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5119037Z Temporarily overriding HOME='/home/runner/work/_temp/f28c23ee-7446-4a33-a266-38ce9d356def' before making global git config changes
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5120909Z Adding repository directory to the temporary git global config as a safe directory
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5136031Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/pviva-FWUF/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5183561Z Deleting the contents of '/home/runner/work/pviva-FWUF/pviva-FWUF'
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5188398Z ##[group]Initializing the repository
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5194660Z [command]/usr/bin/git init /home/runner/work/pviva-FWUF/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5309131Z hint: Using 'master' as the name for the initial branch. This default branch name
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5311848Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5314099Z hint: to use in all of your new repositories, which will suppress this warning,
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5315868Z hint: call:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5316495Z hint:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5317243Z hint: 	git config --global init.defaultBranch <name>
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5318098Z hint:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5319237Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5320681Z hint: 'development'. The just-created branch can be renamed via this command:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5321668Z hint:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5322312Z hint: 	git branch -m <name>
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5323007Z hint:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5323876Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5325631Z Initialized empty Git repository in /home/runner/work/pviva-FWUF/pviva-FWUF/.git/
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5328635Z [command]/usr/bin/git remote add origin https://github.com/paginaviva/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5369968Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5371120Z ##[group]Disabling automatic garbage collection
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5375681Z [command]/usr/bin/git config --local gc.auto 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5418881Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5420041Z ##[group]Setting up auth
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5430157Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5468901Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5841280Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.5880167Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.6123759Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.6158111Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.6401149Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.6438860Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.6440071Z ##[group]Fetching the repository
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.6447465Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8568292Z From https://github.com/paginaviva/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8651246Z  * [new branch]      01-operacion-despliegue-embrion -> origin/01-operacion-despliegue-embrion
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8653143Z  * [new branch]      F3-uf-skeleton-like -> origin/F3-uf-skeleton-like
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8654264Z  * [new branch]      main                -> origin/main
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8656902Z [command]/usr/bin/git branch --list --remote origin/F3-uf-skeleton-like
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8658736Z   origin/F3-uf-skeleton-like
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8661828Z [command]/usr/bin/git rev-parse refs/remotes/origin/F3-uf-skeleton-like
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8674054Z b1fe86df35315953670fecbc1e265e27facb0979
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8682930Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8685724Z ##[group]Determining the checkout info
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8689383Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8691369Z [command]/usr/bin/git sparse-checkout disable
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8735228Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8766635Z ##[group]Checking out the ref
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8771068Z [command]/usr/bin/git checkout --progress --force -B F3-uf-skeleton-like refs/remotes/origin/F3-uf-skeleton-like
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8846713Z Switched to a new branch 'F3-uf-skeleton-like'
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8851331Z branch 'F3-uf-skeleton-like' set up to track 'origin/F3-uf-skeleton-like'.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8858475Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8898139Z [command]/usr/bin/git log -1 --format=%H
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Checkout repository	2025-12-31T06:16:11.8924393Z b1fe86df35315953670fecbc1e265e27facb0979
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	﻿2025-12-31T06:16:11.9193153Z ##[group]Run shivammathur/setup-php@v2
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9194680Z with:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9195949Z   php-version: 8.3
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9197409Z   extensions: gd, mbstring, xml, curl, zip, mysql, pdo_mysql
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9199133Z   tools: composer:v2
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9200348Z   ini-file: production
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9201990Z   github-token: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9203212Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:11.9978644Z [command]/usr/bin/bash /home/runner/work/_actions/shivammathur/setup-php/v2/src/scripts/run.sh
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:12.0417841Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:12.0419689Z [90;1m==> [0m[37;1mSetup PHP[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8133696Z [32;1m✓ [0m[34;1mPHP [0m[90;1mUpdated to PHP 8.3.28[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8135280Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8136243Z [90;1m==> [0m[37;1mSetup Extensions[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8665204Z [32;1m✓ [0m[34;1mgd [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8696155Z [32;1m✓ [0m[34;1mmbstring [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8727151Z [32;1m✓ [0m[34;1mxml [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8758160Z [32;1m✓ [0m[34;1mcurl [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8788315Z [32;1m✓ [0m[34;1mzip [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8818258Z [32;1m✓ [0m[34;1mmysql [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8834216Z [32;1m✓ [0m[34;1mpdo_mysql [0m[90;1mEnabled[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8836011Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:18.8836491Z [90;1m==> [0m[37;1mSetup Tools[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:19.2491317Z [32;1m✓ [0m[34;1mcomposer [0m[90;1mAdded composer 2.9.3[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:19.2494351Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:19.2495639Z [90;1m==> [0m[37;1mSponsor setup-php[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup PHP	2025-12-31T06:16:19.2496915Z [32;1m✓ [0m[34;1msetup-php [0m[90;1mhttps://setup-php.com/sponsor[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	﻿2025-12-31T06:16:19.2691836Z ##[group]Run COMMIT_HASH=$(git rev-parse HEAD)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2692385Z [36;1mCOMMIT_HASH=$(git rev-parse HEAD)[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2692834Z [36;1mCOMMIT_SHORT=$(git rev-parse --short HEAD)[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2693340Z [36;1mBUILD_TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2693784Z [36;1mBUILD_DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2694158Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2694497Z [36;1mecho "commit_hash=${COMMIT_HASH}" >> $GITHUB_OUTPUT[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2695528Z [36;1mecho "commit_short=${COMMIT_SHORT}" >> $GITHUB_OUTPUT[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2696041Z [36;1mecho "build_timestamp=${BUILD_TIMESTAMP}" >> $GITHUB_OUTPUT[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2696523Z [36;1mecho "build_date=${BUILD_DATE}" >> $GITHUB_OUTPUT[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2696908Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2697192Z [36;1m# Create build.json[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2697522Z [36;1mcat > build.json <<EOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2697879Z [36;1m{[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2698222Z [36;1m  "commitHash": "${COMMIT_HASH}",[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2698627Z [36;1m  "buildTimestamp": "${BUILD_TIMESTAMP}",[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2699013Z [36;1m  "buildDate": "${BUILD_DATE}"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2699382Z [36;1m}[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2699646Z [36;1mEOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2699914Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2700195Z [36;1mecho "=== Deployment Info ==="[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2700540Z [36;1mcat build.json[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2700837Z [36;1mecho ""[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2701159Z [36;1mecho "Commit: ${COMMIT_SHORT}"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2701541Z [36;1mecho "Build Timestamp: ${BUILD_TIMESTAMP}"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2701938Z [36;1mecho "Build Date: ${BUILD_DATE}"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2741443Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2741829Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2742124Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2742463Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2742779Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2743073Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2892759Z === Deployment Info ===
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2901648Z {
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2902294Z   "commitHash": "b1fe86df35315953670fecbc1e265e27facb0979",
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2903356Z   "buildTimestamp": "2025-12-31T06:16:19Z",
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2904037Z   "buildDate": "2025-12-31 06:16:19 UTC"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2904494Z }
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2904957Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2905213Z Commit: b1fe86d
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2905755Z Build Timestamp: 2025-12-31T06:16:19Z
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Generate deployment identifier	2025-12-31T06:16:19.2906566Z Build Date: 2025-12-31 06:16:19 UTC
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	﻿2025-12-31T06:16:19.2960899Z ##[group]Run echo "Installing dependencies..."
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2961415Z [36;1mecho "Installing dependencies..."[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2961932Z [36;1mcomposer install --no-dev --optimize-autoloader --no-interaction[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2962468Z [36;1mecho "Dependencies installed successfully"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2996026Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2996384Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2996675Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2997016Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2997344Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.2997648Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.3052288Z Installing dependencies...
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.4949610Z Installing dependencies from lock file
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.4995695Z Verifying lock file contents can be installed on current platform.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5326776Z Package operations: 104 installs, 0 updates, 0 removals
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5353443Z   - Downloading paragonie/random_compat (v2.0.21)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5355768Z   - Downloading birke/rememberme (2.0.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5356584Z   - Downloading composer/semver (3.4.4)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5357845Z   - Downloading psr/log (3.0.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5360879Z   - Downloading psr/cache (3.0.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5364475Z   - Downloading doctrine/event-manager (2.0.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5367926Z   - Downloading doctrine/deprecations (1.1.5)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5370520Z   - Downloading doctrine/dbal (3.10.4)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5373070Z   - Downloading doctrine/inflector (2.1.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5376400Z   - Downloading ezyang/htmlpurifier (v4.19.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5379358Z   - Downloading filp/whoops (2.18.4)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5382425Z   - Downloading voku/portable-ascii (2.0.3)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5385680Z   - Downloading symfony/translation-contracts (v3.6.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5387277Z   - Downloading symfony/polyfill-mbstring (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5389015Z   - Downloading symfony/deprecation-contracts (v3.6.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5390527Z   - Downloading symfony/translation (v6.4.30)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5392086Z   - Downloading symfony/polyfill-php80 (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5393574Z   - Downloading psr/clock (1.0.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5395893Z   - Downloading carbonphp/carbon-doctrine-types (2.1.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5397823Z   - Downloading nesbot/carbon (2.73.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5399792Z   - Downloading illuminate/macroable (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5401340Z   - Downloading psr/simple-cache (3.0.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5402873Z   - Downloading psr/container (2.0.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5404399Z   - Downloading illuminate/contracts (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5406172Z   - Downloading illuminate/conditionable (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5407796Z   - Downloading illuminate/collections (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5409371Z   - Downloading symfony/polyfill-ctype (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5410915Z   - Downloading illuminate/support (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5412433Z   - Downloading illuminate/pipeline (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5413931Z   - Downloading illuminate/bus (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5415675Z   - Downloading illuminate/cache (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5417190Z   - Downloading illuminate/config (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5418695Z   - Downloading illuminate/container (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5420712Z   - Downloading brick/math (0.12.3)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5422349Z   - Downloading illuminate/database (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5423946Z   - Downloading illuminate/redis (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5425750Z   - Downloading symfony/polyfill-php83 (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5427296Z   - Downloading symfony/http-foundation (v6.4.30)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5428689Z   - Downloading symfony/finder (v6.4.27)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5430288Z   - Downloading illuminate/filesystem (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5431780Z   - Downloading illuminate/session (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5433252Z   - Downloading illuminate/events (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5435113Z   - Downloading illuminate/view (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5437162Z   - Downloading jackiedo/path-helper (v1.0.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5438937Z   - Downloading symfony/process (v6.4.26)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5440289Z   - Downloading symfony/polyfill-intl-normalizer (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5441977Z   - Downloading symfony/polyfill-intl-grapheme (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5443548Z   - Downloading symfony/string (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5445451Z   - Downloading symfony/service-contracts (v3.6.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5447143Z   - Downloading symfony/console (v6.4.30)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5449581Z   - Downloading nunomaduro/termwind (v1.17.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5451813Z   - Downloading laravel/prompts (v0.1.25)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5453353Z   - Downloading illuminate/console (v10.49.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5455231Z   - Downloading jackiedo/dotenv-editor (2.1.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5457188Z   - Downloading laravel/serializable-closure (v2.0.7)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5459654Z   - Downloading twig/twig (v3.***.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5461031Z   - Downloading psr/event-dispatcher (1.0.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5462901Z   - Downloading symfony/event-dispatcher-contracts (v3.6.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5464514Z   - Downloading symfony/event-dispatcher (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5468566Z   - Downloading symfony/var-dumper (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5470018Z   - Downloading symfony/polyfill-php85 (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5471748Z   - Downloading symfony/error-handler (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5473444Z   - Downloading symfony/http-kernel (v7.2.9)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5475451Z   - Downloading symfony/var-exporter (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5477297Z   - Downloading symfony/dependency-injection (v7.4.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5479397Z   - Downloading symfony/filesystem (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5480850Z   - Downloading symfony/config (v7.4.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5482516Z   - Downloading symfony/asset (v7.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5484409Z   - Downloading symfony/webpack-encore-bundle (v2.4.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5487159Z   - Downloading lcharette/webpack-encore-twig (1.2.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5489084Z   - Downloading league/csv (9.28.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5490746Z   - Downloading league/mime-type-detection (1.16.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5492359Z   - Downloading league/flysystem-local (3.30.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5493967Z   - Downloading league/flysystem (3.30.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5496679Z   - Downloading monolog/monolog (3.9.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5498985Z   - Downloading nikic/fast-route (v1.3.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5500450Z   - Downloading nikic/php-parser (v4.19.5)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5502111Z   - Downloading psr/http-message (2.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5503792Z   - Downloading psr/http-server-handler (1.0.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5505731Z   - Downloading psr/http-server-middleware (1.0.2)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5507323Z   - Downloading psr/http-factory (1.1.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5509867Z   - Downloading slim/slim (4.15.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5512135Z   - Downloading php-di/invoker (2.3.7)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5513535Z   - Downloading php-di/php-di (7.1.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5515394Z   - Downloading php-di/slim-bridge (3.4.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5518029Z   - Downloading phpmailer/phpmailer (v6.12.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5520307Z   - Downloading predis/predis (v2.4.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5521719Z   - Downloading slim/csrf (1.5.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5524230Z   - Downloading ralouphie/getallheaders (3.0.3)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5526747Z   - Downloading fig/http-message-util (1.1.5)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5528227Z   - Downloading slim/psr7 (1.8.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5530326Z   - Downloading symfony/polyfill-php81 (v1.33.0)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5531795Z   - Downloading slim/twig-view (3.4.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5533511Z   - Downloading symfony/yaml (v7.4.1)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5536240Z   - Downloading phpoption/phpoption (1.9.5)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5538584Z   - Downloading graham-campbell/result-type (v1.1.4)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5540828Z   - Downloading vlucas/phpdotenv (v5.6.3)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5542334Z   - Downloading vlucas/valitron (v1.4.11)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5545028Z   - Downloading userfrosting/framework (5.1.4)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5546598Z   - Downloading userfrosting/sprinkle-core (5.1.6)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5548334Z   - Downloading userfrosting/sprinkle-account (5.1.6)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5549990Z   - Downloading userfrosting/theme-adminlte (5.1.4)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5551642Z   - Downloading userfrosting/sprinkle-admin (5.1.5)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:19.5553239Z   - Downloading userfrosting/userfrosting (5.1.3)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5441907Z   - Installing paragonie/random_compat (v2.0.21): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5459702Z   - Installing birke/rememberme (2.0.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5465626Z   - Installing composer/semver (3.4.4): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5471299Z   - Installing psr/log (3.0.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5476764Z   - Installing psr/cache (3.0.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5482691Z   - Installing doctrine/event-manager (2.0.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5488296Z   - Installing doctrine/deprecations (1.1.5): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5494166Z   - Installing doctrine/dbal (3.10.4): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5499813Z   - Installing doctrine/inflector (2.1.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5505540Z   - Installing ezyang/htmlpurifier (v4.19.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5510836Z   - Installing filp/whoops (2.18.4): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5518533Z   - Installing voku/portable-ascii (2.0.3): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5520652Z   - Installing symfony/translation-contracts (v3.6.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5521919Z   - Installing symfony/polyfill-mbstring (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5523574Z   - Installing symfony/deprecation-contracts (v3.6.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5524175Z   - Installing symfony/translation (v6.4.30): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5525687Z   - Installing symfony/polyfill-php80 (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5527939Z   - Installing psr/clock (1.0.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5530136Z   - Installing carbonphp/carbon-doctrine-types (2.1.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5532242Z   - Installing nesbot/carbon (2.73.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5534446Z   - Installing illuminate/macroable (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5536849Z   - Installing psr/simple-cache (3.0.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5539005Z   - Installing psr/container (2.0.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5541126Z   - Installing illuminate/contracts (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5543290Z   - Installing illuminate/conditionable (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5545767Z   - Installing illuminate/collections (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5547908Z   - Installing symfony/polyfill-ctype (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5565564Z   - Installing illuminate/support (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5566738Z   - Installing illuminate/pipeline (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5567607Z   - Installing illuminate/bus (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5568103Z   - Installing illuminate/cache (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5568606Z   - Installing illuminate/config (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5569422Z   - Installing illuminate/container (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5570229Z   - Installing brick/math (0.12.3): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5570732Z   - Installing illuminate/database (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5571809Z   - Installing illuminate/redis (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5574013Z   - Installing symfony/polyfill-php83 (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5576500Z   - Installing symfony/http-foundation (v6.4.30): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5578551Z   - Installing symfony/finder (v6.4.27): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5580641Z   - Installing illuminate/filesystem (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5582690Z   - Installing illuminate/session (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5584707Z   - Installing illuminate/events (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5587298Z   - Installing illuminate/view (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5603763Z   - Installing jackiedo/path-helper (v1.0.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5605153Z   - Installing symfony/process (v6.4.26): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5606502Z   - Installing symfony/polyfill-intl-normalizer (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5612232Z   - Installing symfony/polyfill-intl-grapheme (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5614683Z   - Installing symfony/string (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5618153Z   - Installing symfony/service-contracts (v3.6.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5620647Z   - Installing symfony/console (v6.4.30): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5623150Z   - Installing nunomaduro/termwind (v1.17.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5626255Z   - Installing laravel/prompts (v0.1.25): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5628359Z   - Installing illuminate/console (v10.49.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5630909Z   - Installing jackiedo/dotenv-editor (2.1.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5633522Z   - Installing laravel/serializable-closure (v2.0.7): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5637370Z   - Installing twig/twig (v3.***.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5640589Z   - Installing psr/event-dispatcher (1.0.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5643247Z   - Installing symfony/event-dispatcher-contracts (v3.6.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5646434Z   - Installing symfony/event-dispatcher (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5649022Z   - Installing symfony/var-dumper (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5650717Z   - Installing symfony/polyfill-php85 (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5653358Z   - Installing symfony/error-handler (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5860965Z   - Installing symfony/http-kernel (v7.2.9): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5862569Z   - Installing symfony/var-exporter (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5863948Z   - Installing symfony/dependency-injection (v7.4.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5865558Z   - Installing symfony/filesystem (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5866939Z   - Installing symfony/config (v7.4.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5906259Z   - Installing symfony/asset (v7.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5907918Z   - Installing symfony/webpack-encore-bundle (v2.4.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5909204Z   - Installing lcharette/webpack-encore-twig (1.2.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5910304Z   - Installing league/csv (9.28.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5911335Z   - Installing league/mime-type-detection (1.16.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5912848Z   - Installing league/flysystem-local (3.30.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5925829Z   - Installing league/flysystem (3.30.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5927308Z   - Installing monolog/monolog (3.9.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5928624Z   - Installing nikic/fast-route (v1.3.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5929997Z   - Installing nikic/php-parser (v4.19.5): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5931359Z   - Installing psr/http-message (2.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5933455Z   - Installing psr/http-server-handler (1.0.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5936105Z   - Installing psr/http-server-middleware (1.0.2): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5938028Z   - Installing psr/http-factory (1.1.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5938852Z   - Installing slim/slim (4.15.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5939651Z   - Installing php-di/invoker (2.3.7): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5940756Z   - Installing php-di/php-di (7.1.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5941619Z   - Installing php-di/slim-bridge (3.4.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5942539Z   - Installing phpmailer/phpmailer (v6.12.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5943420Z   - Installing predis/predis (v2.4.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5944197Z   - Installing slim/csrf (1.5.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5946390Z   - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5947341Z   - Installing fig/http-message-util (1.1.5): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5948205Z   - Installing slim/psr7 (1.8.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5949274Z   - Installing symfony/polyfill-php81 (v1.33.0): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5952811Z   - Installing slim/twig-view (3.4.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5956255Z   - Installing symfony/yaml (v7.4.1): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5960373Z   - Installing phpoption/phpoption (1.9.5): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5964416Z   - Installing graham-campbell/result-type (v1.1.4): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5967842Z   - Installing vlucas/phpdotenv (v5.6.3): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5971169Z   - Installing vlucas/valitron (v1.4.11): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5975919Z   - Installing userfrosting/framework (5.1.4): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5978615Z   - Installing userfrosting/sprinkle-core (5.1.6): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5981573Z   - Installing userfrosting/sprinkle-account (5.1.6): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5985090Z   - Installing userfrosting/theme-adminlte (5.1.4): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5988605Z   - Installing userfrosting/sprinkle-admin (5.1.5): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:21.5990160Z   - Installing userfrosting/userfrosting (5.1.3): Extracting archive
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:22.5786428Z Package birke/rememberme is abandoned, you should avoid using it. Use mober/rememberme instead.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:22.5787724Z Generating optimized autoload files
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:23.5866222Z 53 packages you are using are looking for funding.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:23.5866925Z Use the `composer fund` command to find out more!
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Install Composer dependencies	2025-12-31T06:16:23.6194123Z Dependencies installed successfully
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	﻿2025-12-31T06:16:23.6240693Z ##[group]Run echo "=== Preparing deployment artifact ==="
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6241570Z [36;1mecho "=== Preparing deployment artifact ==="[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6242269Z [36;1mmkdir -p /tmp/deploy[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6242825Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6243324Z [36;1m# Copy application structure[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6243947Z [36;1mcp -r public /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6244528Z [36;1mcp -r app /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6245274Z [36;1mcp -r vendor /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6245885Z [36;1mcp -r storage /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6246455Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6246932Z [36;1m# Copy configuration files[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6247534Z [36;1mcp composer.json /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6248163Z [36;1mcp composer.lock /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6248760Z [36;1mcp build.json /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6249304Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6249793Z [36;1m# Copy environment example[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6250441Z [36;1mcp .env.example /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6251011Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6251538Z [36;1mecho "=== Deployment artifact structure ==="[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6252182Z [36;1mls -lah /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6252734Z [36;1mdu -sh /tmp/deploy/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6301813Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6302378Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6302857Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6303427Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6303966Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6304444Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:23.6381251Z === Preparing deployment artifact ===
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1400656Z === Deployment artifact structure ===
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1414144Z total 368K
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1414557Z drwxr-xr-x  6 runner runner 4.0K Dec 31 06:16 .
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1415218Z drwxrwxrwt 14 root   root    12K Dec 31 06:16 ..
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1415655Z -rw-r--r--  1 runner runner 2.0K Dec 31 06:16 .env.example
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1416129Z drwxr-xr-x  2 runner runner 4.0K Dec 31 06:16 app
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1416549Z -rw-r--r--  1 runner runner  149 Dec 31 06:16 build.json
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1416984Z -rw-r--r--  1 runner runner  936 Dec 31 06:16 composer.json
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1417427Z -rw-r--r--  1 runner runner 321K Dec 31 06:16 composer.lock
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1417846Z drwxr-xr-x  2 runner runner 4.0K Dec 31 06:16 public
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1418255Z drwxr-xr-x  5 runner runner 4.0K Dec 31 06:16 storage
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1418657Z drwxr-xr-x 34 runner runner 4.0K Dec 31 06:16 vendor
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Prepare deployment artifact	2025-12-31T06:16:24.1821204Z 53M	/tmp/deploy/
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	﻿2025-12-31T06:16:24.1882067Z ##[group]Run cat > /tmp/deploy/.env <<EOF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1882554Z [36;1mcat > /tmp/deploy/.env <<EOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1882936Z [36;1m# Staging Environment Configuration[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1883314Z [36;1mAPP_ENV=staging[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1883618Z [36;1mAPP_DEBUG=false[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1884026Z [36;1mAPP_URL=https://***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1884355Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1884625Z [36;1m# Database[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1885348Z [36;1mDB_CONNECTION=mysql[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1885692Z [36;1mDB_HOST=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1885978Z [36;1mDB_PORT=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1886279Z [36;1mDB_DATABASE=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1886617Z [36;1mDB_USERNAME=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1886910Z [36;1mDB_PASSWORD=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1887194Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1887462Z [36;1m# Mail[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1887834Z [36;1mMAIL_MAILER=smtp[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1888313Z [36;1mMAIL_HOST=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1888896Z [36;1mMAIL_PORT=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1889565Z [36;1mMAIL_USERNAME=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1890014Z [36;1mMAIL_PASSWORD=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1890545Z [36;1mMAIL_ENCRYPTION=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1891100Z [36;1mMAIL_FROM_ADDRESS=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1891582Z [36;1mMAIL_FROM_NAME=PVUF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1892100Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1906279Z [36;1m# Security[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1906666Z [36;1mAPP_KEY=[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1906986Z [36;1mSESSION_LIFETIME=120[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1907371Z [36;1mSESSION_DRIVER=file[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1907697Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1907965Z [36;1m# Cache[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1908262Z [36;1mCACHE_DRIVER=file[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1908575Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1908836Z [36;1m# Logging[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1909130Z [36;1mLOG_LEVEL=info[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1909426Z [36;1mEOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1909690Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1909983Z [36;1mecho ".env file created for staging"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1943641Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1943996Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1944292Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1944635Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1945147Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.1945456Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create .env file for staging	2025-12-31T06:16:24.2013835Z .env file created for staging
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	﻿2025-12-31T06:16:24.2050837Z ##[group]Run mkdir -p ~/.ssh
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2051262Z [36;1mmkdir -p ~/.ssh[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2051569Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2051847Z [36;1m# Write private key[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2052174Z [36;1mcat > ~/.ssh/deploy_key <<'EOF'[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2052823Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2053321Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2053801Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2054270Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2054720Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2055447Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2055922Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2056419Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2056881Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2057341Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2057765Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2058211Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2058671Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2059122Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2059576Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2060023Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2060469Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2060927Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2061353Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2061785Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2062243Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2062675Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2063125Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2063564Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2064017Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2064461Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2064750Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2065263Z [36;1m***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2065525Z [36;1mEOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2065783Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2066058Z [36;1mchmod 600 ~/.ssh/deploy_key[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2066383Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2066655Z [36;1m# Add host to known_hosts[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2067181Z [36;1mssh-keyscan -p ${DEPLOY_PORT:-***} ${DEPLOY_HOST} >> ~/.ssh/known_hosts 2>/dev/null || true[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2067673Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2068008Z [36;1m# Create a script to provide passphrase to ssh-add[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2068455Z [36;1mcat > /tmp/ssh_passphrase.sh <<'EOFPASS'[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2068836Z [36;1m#!/bin/bash[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2069139Z [36;1mecho "$SSH_KEY_PASSPHRASE"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2069468Z [36;1mEOFPASS[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2069773Z [36;1mchmod +x /tmp/ssh_passphrase.sh[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2070117Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2070433Z [36;1m# Start ssh-agent and add key with passphrase[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2070824Z [36;1meval $(ssh-agent -s)[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2071205Z [36;1mexport SSH_ASKPASS=/tmp/ssh_passphrase.sh[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2071615Z [36;1mexport SSH_ASKPASS_REQUIRE=force[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2072101Z [36;1mecho "$SSH_KEY_PASSPHRASE" | setsid ssh-add ~/.ssh/deploy_key 2>&1 || true[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2072570Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2072875Z [36;1m# Export agent info for subsequent steps[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2073300Z [36;1mecho "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2073746Z [36;1mecho "SSH_AGENT_PID=$SSH_AGENT_PID" >> $GITHUB_ENV[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2107620Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2107964Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2108250Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2108579Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2108891Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2117099Z   SSH_PRIVATE_KEY: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2117449Z   SSH_KEY_PASSPHRASE: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2117779Z   DEPLOY_HOST: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2118076Z   DEPLOY_PORT: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:24.2118367Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:26.4320903Z Agent pid 2694
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Setup SSH with Passphrase Support	2025-12-31T06:16:26.5681805Z Identity added: /home/runner/.ssh/deploy_key (/home/runner/.ssh/deploy_key)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	﻿2025-12-31T06:16:26.5721246Z ##[group]Run echo "Testing SSH connection to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT..."
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5721951Z [36;1mecho "Testing SSH connection to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PORT..."[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5722667Z [36;1mssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "echo 'SSH Connection successful!'; pwd; php --version" || {[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5723227Z [36;1m  echo ""[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5723552Z [36;1m  echo "ERROR: SSH connection failed!"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5723917Z [36;1m  exit 1[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5724188Z [36;1m}[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5756759Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5757096Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5757378Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5757707Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5758032Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5758369Z   SSH_AUTH_SOCK: /tmp/ssh-SEElTKknoAph/agent.2693
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5758757Z   SSH_AGENT_PID: 2694
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5759490Z   DEPLOY_HOST: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5759850Z   DEPLOY_USER: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5760145Z   DEPLOY_PORT: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5760424Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:26.5813056Z Testing SSH connection to ***@***:***...
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:29.2915171Z SSH Connection successful!
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:29.2915870Z /home/***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:29.4096465Z PHP 8.4.14 (cli) (built: Oct *** 2025 00:00:00) (NTS)
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:29.4097054Z Copyright (c) The PHP Group
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Test SSH connection	2025-12-31T06:16:29.4097463Z Zend Engine v4.4.14, Copyright (c) Zend Technologies
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	﻿2025-12-31T06:16:29.4298819Z ##[group]Run echo "Starting deployment to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH..."
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4299566Z [36;1mecho "Starting deployment to $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH..."[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4300052Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4300396Z [36;1m# Create backup of existing deployment (if exists)[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4300859Z [36;1mssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST \[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4301274Z [36;1m  "if [ -d $DEPLOY_PATH ]; then \[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4301725Z [36;1m    cp -r $DEPLOY_PATH ${DEPLOY_PATH}_backup_$(date +%Y%m%d_%H%M%S); \[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4302157Z [36;1m  fi"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4302424Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4302710Z [36;1m# Transfer the entire application[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4303190Z [36;1mscp -r -P $DEPLOY_PORT /tmp/deploy/* $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4303644Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4303973Z [36;1mecho "Files transferred successfully!"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4336339Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4336690Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4336978Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4337313Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4337625Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4337965Z   SSH_AUTH_SOCK: /tmp/ssh-SEElTKknoAph/agent.2693
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4338349Z   SSH_AGENT_PID: 2694
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4338737Z   DEPLOY_HOST: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4339050Z   DEPLOY_USER: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4339337Z   DEPLOY_PORT: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4339684Z   DEPLOY_PATH: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4339970Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T06:16:29.4394011Z Starting deployment to ***@***:***...
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Deploy application via SCP	2025-12-31T07:04:29.7899938Z Files transferred successfully!
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	﻿2025-12-31T07:04:29.7951350Z ##[group]Run ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST << 'EOSSH'
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7952360Z [36;1mssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST << 'EOSSH'[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7953267Z [36;1m  cd ***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7953749Z [36;1m  [0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7954307Z [36;1m  # Set proper permissions[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7955154Z [36;1m  chmod -R 755 public/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7955749Z [36;1m  chmod -R 775 storage/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7956316Z [36;1m  [0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7956925Z [36;1m  # Ensure writable directories exist and are writable[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7957784Z [36;1m  mkdir -p storage/logs storage/cache storage/sessions[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7958528Z [36;1m  chmod -R 775 storage/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7959087Z [36;1m  [0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7959626Z [36;1m  echo "Permissions set successfully"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.7960255Z [36;1mEOSSH[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8006805Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8007369Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8007917Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8008523Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8009162Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8009768Z   SSH_AUTH_SOCK: /tmp/ssh-SEElTKknoAph/agent.2693
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8010497Z   SSH_AGENT_PID: 2694
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8011100Z   DEPLOY_HOST: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8011956Z   DEPLOY_USER: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8012505Z   DEPLOY_PORT: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8013112Z   DEPLOY_PATH: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8013625Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:29.8105178Z Pseudo-terminal will not be allocated because stdin is not a terminal.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6462547Z      _                     _       
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6463117Z  ___| |__   __ _ _ __   __| |_   _ 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6463582Z / __| '_ \ / _` | '_ \ / _` | | | |
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6478021Z \__ \ | | | (_| | | | | (_| | |_| |
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6478363Z |___/_| |_|\__,_|_| |_|\__,_|\__, |
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6478683Z                              |___/ 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6479072Z Welcome to shandy.hostns.io, hope you enjoy your stay!
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6479345Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6479627Z You can view the cPanel interface via: https://shandy.hostns.io:2083
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.6479962Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Set permissions on server	2025-12-31T07:04:31.7912693Z Permissions set successfully
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	﻿2025-12-31T07:04:31.7977091Z ##[group]Run echo "Verifying deployment..."
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.7977868Z [36;1mecho "Verifying deployment..."[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.7978613Z [36;1mssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST \[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.7979387Z [36;1m  "ls -lah $DEPLOY_PATH/ && echo '---' && \[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.7980133Z [36;1m   ls -lah $DEPLOY_PATH/public/ && echo '---' && \[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.7980877Z [36;1m   cat $DEPLOY_PATH/build.json"[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8027251Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8027813Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8028302Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8028883Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8029447Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8030079Z   SSH_AUTH_SOCK: /tmp/ssh-SEElTKknoAph/agent.2693
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8030800Z   SSH_AGENT_PID: 2694
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8031422Z   DEPLOY_HOST: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8031997Z   DEPLOY_USER: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8032586Z   DEPLOY_PORT: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8033224Z   DEPLOY_PATH: ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8033809Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:31.8102874Z Verifying deployment...
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4300418Z total 392K
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4301319Z drwxr-xr-x  8 *** *** 4.0K Dec 31 06:16 .
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4302261Z drwx--x--x 39 *** *** 4.0K Dec 31 06:16 ..
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4303104Z -rw-r--r--  1 *** *** 1.2K Dec 30 13:44 .htaccess
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4303959Z -rw-r--r--  1 *** ***  580 Dec 30 13:44 .user.ini
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4305548Z drwxr-xr-x  3 *** *** 4.0K Dec 30 11:43 .well-known
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4306707Z drwxr-xr-x  2 *** *** 4.0K Dec 31 06:16 app
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4307705Z -rw-r--r--  1 *** ***  149 Dec 31 06:16 build.json
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4308777Z drwxr-xr-x  2 *** *** 4.0K Dec 30 11:42 cgi-bin
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4309892Z -rw-r--r--  1 *** ***  936 Dec 31 06:16 composer.json
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4310883Z -rw-r--r--  1 *** *** 321K Dec 31 06:16 composer.lock
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4311724Z -rw-r--r--  1 *** ***  13K Dec 31 06:11 index.php
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4312588Z -rw-r--r--  1 *** ***  580 Dec 30 13:44 php.ini
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4313469Z drwxr-xr-x  2 *** *** 4.0K Dec 31 06:16 public
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4314377Z drwxrwxr-x  5 *** *** 4.0K Dec 31 06:16 storage
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4315445Z drwxr-xr-x 34 *** *** 4.0K Dec 31 07:03 vendor
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4316194Z ---
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4326664Z total 20K
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4327246Z drwxr-xr-x 2 *** *** 4.0K Dec 31 06:16 .
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4327997Z drwxr-xr-x 8 *** *** 4.0K Dec 31 06:16 ..
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4328747Z -rwxr-xr-x 1 *** ***  190 Dec 31 06:16 .gitkeep
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4329546Z -rwxr-xr-x 1 *** ***  597 Dec 31 06:16 .htaccess
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4330335Z -rwxr-xr-x 1 *** ***  706 Dec 31 06:16 index.php
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4341981Z ---
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4364589Z {
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4365389Z   "commitHash": "b1fe86df35315953670fecbc1e265e27facb0979",
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4365842Z   "buildTimestamp": "2025-12-31T06:16:19Z",
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4366208Z   "buildDate": "2025-12-31 06:16:19 UTC"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Verify deployment	2025-12-31T07:04:33.4367213Z }
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	﻿2025-12-31T07:04:33.4407557Z ##[group]Run cat <<EOF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4407919Z [36;1mcat <<EOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4408210Z [36;1m# Deployment Summary[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4408513Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4408781Z [36;1m**Status:** Success ✓[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4409095Z [36;1m**Commit:** b1fe86d[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4409439Z [36;1m**Build Timestamp:** 2025-12-31T06:16:19Z[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4409861Z [36;1m**Deployed to:** ***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4410225Z [36;1m**Path:** ***[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4410571Z [36;1m**URL:** https://***/[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4410883Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4411148Z [36;1m## Next Steps[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4411430Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4411873Z [36;1m1. Change webroot in hosting panel to point to: ***/public[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4412428Z [36;1m2. Access https://***/ to run UserFrosting installation[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4412926Z [36;1m3. Complete installation wizard with admin user credentials[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4413374Z [36;1m4. Verify MariaDB connection[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4413758Z [36;1m5. Test SMTP email sending[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4414078Z [36;1m[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4414328Z [36;1mEOF[0m
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4445625Z shell: /usr/bin/bash -e {0}
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4445949Z env:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4446224Z   COMPOSER_PROCESS_TIMEOUT: 0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4446548Z   COMPOSER_NO_INTERACTION: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4446851Z   COMPOSER_NO_AUDIT: 1
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4447180Z   SSH_AUTH_SOCK: /tmp/ssh-SEElTKknoAph/agent.2693
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4447567Z   SSH_AGENT_PID: 2694
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4447851Z ##[endgroup]
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4506945Z # Deployment Summary
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4507290Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4507698Z **Status:** Success ✓
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4508068Z **Commit:** b1fe86d
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4508380Z **Build Timestamp:** 2025-12-31T06:16:19Z
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4508780Z **Deployed to:** ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4509117Z **Path:** ***
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4509446Z **URL:** https://***/
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4509681Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4510039Z ## Next Steps
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4510310Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4510820Z 1. Change webroot in hosting panel to point to: ***/public
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4511622Z 2. Access https://***/ to run UserFrosting installation
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4512088Z 3. Complete installation wizard with admin user credentials
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4512499Z 4. Verify MariaDB connection
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4512815Z 5. Test SMTP email sending
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Create deployment summary	2025-12-31T07:04:33.4512997Z 
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	﻿2025-12-31T07:04:33.4590207Z Post job cleanup.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5509113Z [command]/usr/bin/git version
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5543963Z git version 2.52.0
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5585445Z Temporarily overriding HOME='/home/runner/work/_temp/8148a807-2076-45f4-be21-8a54bc944894' before making global git config changes
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5586892Z Adding repository directory to the temporary git global config as a safe directory
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5590959Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/pviva-FWUF/pviva-FWUF
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5625759Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5657377Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5882079Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5901709Z http.https://github.com/.extraheader
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5913595Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.5942631Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.6157576Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Post Checkout repository	2025-12-31T07:04:33.6187416Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Complete job	﻿2025-12-31T07:04:33.6515299Z Evaluate and set environment url
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Complete job	2025-12-31T07:04:33.6525833Z ##[warning]Skip setting environment url as environment 'staging' may contain secret.
+Build and Deploy UserFrosting to pvuf.plazza.xyz	Complete job	2025-12-31T07:04:33.6532933Z Cleaning up orphan processes
