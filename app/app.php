@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * UserFrosting Application Bootstrap
  * 
@@ -8,13 +10,8 @@
  * @package PVUF
  */
 
+use UserFrosting\App\MyApp;
 use UserFrosting\UserFrosting;
 
-// Define paths
-$projectRoot = dirname(__DIR__);
-
-// Create UserFrosting application
-$uf = new UserFrosting($projectRoot);
-
-// Return the application instance
-return $uf;
+// Create and return UserFrosting application with main sprinkle
+return new UserFrosting(MyApp::class);
